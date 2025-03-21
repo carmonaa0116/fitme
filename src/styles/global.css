@@ -1,0 +1,23 @@
+:root{
+    --black: #090707;
+    --red: #DB4C44;
+    --white: #FFFFFF;
+
+}
+
+*{
+    border: 1px solid white;
+}
+
+body{
+    background-color: var(--black);
+}
+
+html{
+
+    background-color: var(--black);
+}
+
+ul{
+    list-style: none;
+}
