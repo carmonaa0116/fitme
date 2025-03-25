@@ -1,23 +1,30 @@
+@import url(../assets/font/font.css);
 :root{
     --black: #090707;
     --red: #DB4C44;
     --white: #FFFFFF;
-
+    --gray: #e5e5e50f;
 }
 
-*{
-    border: 1px solid white;
-}
-
-body{
+body, html{
+    padding: 0;
+    margin: 0 auto;
     background-color: var(--black);
-}
-
-html{
-
-    background-color: var(--black);
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 ul{
     list-style: none;
+}
+
+button{
+    cursor: pointer;
+    border: none;
+    font-family: 'Poppins';
+    font-weight: 500;
 }
