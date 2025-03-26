@@ -1,5 +1,10 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import dotenv from 'dotenv';
 
-// https://astro.build/config
-export default defineConfig({});
+// Cargar el archivo .env manualmente (opcional)
+dotenv.config();
+
+export default defineConfig({
+  // Aquí puedes agregar configuraciones adicionales si es necesario
+});

@@ -1,6 +1,6 @@
 <nav id="navBar">
     <div id="logoNavBar">
-        <a href="#">
+        <a href="/">
             <svg
                 width="49"
                 height="49"
@@ -47,6 +47,7 @@
         font-family: "Poppins", sans-serif;
         font-weight: 600;
         display: flex;
+        height: 100px;
         justify-content: space-between;
         align-items: center;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -138,3 +139,8 @@
         }
     }
 </style>
+<script>
+    document.getElementById("login-button-navBar").addEventListener("click", () => {
+        window.location.href = "/login";
+    });
+</script>

@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<Layout>
+    <main>
+        <button id="button-insertar-ejercicio">INSERTAR EJERCICIO</button>
+        <table id="table-ejercicios">
+            <thead id="table-ejercicios-thead">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Imagen</th>
+                    <th>Video</th>
+                </tr>
+            </thead>
+            <tbody id="table-ejercicios-tbody"></tbody>
+        </table>
+
+        <!-- Dialog para insertar ejercicio -->
+        <dialog id="dialog-insertar-ejercicio">
+            <div>
+                <h2>Insertar Ejercicio</h2>
+                <form id="form-insertar-ejercicio">
+                    <!-- Sección del nombre -->
+                    <div>
+                        <label for="nombre">Nombre del ejercicio:</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+
+                    <!-- Sección de imagen -->
+                    <div>
+                        <label for="imagen">Imagen del ejercicio:</label>
+                        <input type="file" id="imagen" name="imagen" accept="image/*" required style="cursor:pointer;">
+                    </div>
+
+                    <!-- Sección del video -->
+                    <div>
+                        <label for="video">Video del ejercicio (enlace):</label>
+                        <input type="url" id="video" name="video" required>
+                    </div>
+                    <div id="div-musculos">
+                        <label for="select-musculos">Elige los músculos implicados</p>
+                        <div id="checkbox-musculos">
+
+                        </div>
+                    </div>
+
+                    <!-- Botones de acción -->
+                    <div>
+                        <button type="submit">Insertar</button>
+                        <button type="button" id="cancelar">Cancelar</button>
+                    </div>
+
+                </form>
+            </div>
+        </dialog>
+    </main>
+</Layout>
+
+<style>
+    .musculo {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        gap: 10px;
+        border: 1px solid black;
+    }
+    #form-insertar-ejercicio {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* Añadido margen para separar cada sección */
+    #form-insertar-ejercicio div {
+        margin-bottom: 10px;
+    }
+</style>
+
+<script type="module" src="/src/js/scriptGesEjercicios.js"></script>

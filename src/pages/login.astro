@@ -7,13 +7,7 @@ import Hero from '../components/Hero.astro';
 ---
 
 <Layout>
-	<Hero />
     <main>
         <button id="button-gestion-ejercicios">Gestionar Ejercicios</button>
     </main>
 </Layout>
-<script>
-    document.getElementById("button-gestion-ejercicios")?.addEventListener("click", () => {
-        window.location.href = "/gesEjercicios";
-    });
-</script>

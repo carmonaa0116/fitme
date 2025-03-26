@@ -28,3 +28,15 @@ button{
     font-family: 'Poppins';
     font-weight: 500;
 }
+
+dialog{
+    font-family: 'Poppins';
+    background-color: var(--red);
+    color: var(--white);
+    border: 1px solid var(--gray);
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 90vw;
+    box-shadow: 0px 0px 10px 0px var(--red);
+}
