@@ -15,7 +15,7 @@ Actualmente, este proyecto se encuentra en fase de producción. Debido a esto, l
 
 ## Instrucciones de Ejecución
 1. Iniciar XAMPP y asegurarse de que Apache y MySQL están en ejecución.
-2. Verificar que la base de datos esté correctamente configurada.
+2. Verificar que la base de datos esté correctamente configurada y que el backend esté en la ruta especificada.
 3. Ejecutar el frontend con el siguiente comando en la raíz del proyecto Astro:
    ```sh
    npm run dev
