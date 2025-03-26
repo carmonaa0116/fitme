@@ -1,21 +1,13 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import TableDiv from "../components/TableDiv.astro";
 ---
 
 <Layout>
-    <main>
+    <main id="main-ges-ejercicios">
         <button id="button-insertar-ejercicio">INSERTAR EJERCICIO</button>
-        <table id="table-ejercicios">
-            <thead id="table-ejercicios-thead">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Imagen</th>
-                    <th>Video</th>
-                </tr>
-            </thead>
-            <tbody id="table-ejercicios-tbody"></tbody>
-        </table>
+        <TableDiv />
 
         <!-- Dialog para insertar ejercicio -->
         <dialog id="dialog-insertar-ejercicio">
@@ -25,33 +17,41 @@ import Hero from '../components/Hero.astro';
                     <!-- Sección del nombre -->
                     <div>
                         <label for="nombre">Nombre del ejercicio:</label>
-                        <input type="text" id="nombre" name="nombre" required>
+                        <input type="text" id="nombre" name="nombre" required />
                     </div>
 
                     <!-- Sección de imagen -->
                     <div>
                         <label for="imagen">Imagen del ejercicio:</label>
-                        <input type="file" id="imagen" name="imagen" accept="image/*" required style="cursor:pointer;">
+                        <input
+                            type="file"
+                            id="imagen"
+                            name="imagen"
+                            accept="image/*"
+                            required
+                            style="cursor:pointer;"
+                        />
                     </div>
 
                     <!-- Sección del video -->
                     <div>
                         <label for="video">Video del ejercicio (enlace):</label>
-                        <input type="url" id="video" name="video" required>
+                        <input type="url" id="video" name="video" required />
                     </div>
                     <div id="div-musculos">
-                        <label for="select-musculos">Elige los músculos implicados</p>
-                        <div id="checkbox-musculos">
-
-                        </div>
+                        <label for="select-musculos"
+                            >Elige los músculos implicados</label
+                        >
+                        <div id="checkbox-musculos"></div>
                     </div>
 
                     <!-- Botones de acción -->
                     <div>
                         <button type="submit">Insertar</button>
-                        <button type="button" id="cancelar">Cancelar</button>
+                        <button type="button" id="cancelar"
+                            >Cerrar Ventana</button
+                        >
                     </div>
-
                 </form>
             </div>
         </dialog>
@@ -59,13 +59,20 @@ import Hero from '../components/Hero.astro';
 </Layout>
 
 <style>
-    .musculo {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        gap: 10px;
-        border: 1px solid black;
+    @import url("../styles/global.css");
+
+
+    /* Botón centrado */
+    #button-insertar-ejercicio {
+        margin: 20px;
     }
+
+    #main-ges-ejercicios {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
     #form-insertar-ejercicio {
         display: flex;
         flex-direction: column;
@@ -75,6 +82,11 @@ import Hero from '../components/Hero.astro';
     /* Añadido margen para separar cada sección */
     #form-insertar-ejercicio div {
         margin-bottom: 10px;
+    }
+
+    #form-insertar-ejercicio > div > input[type="text"],
+    #form-insertar-ejercicio > div > input[type="url"] {
+        width: 100%;
     }
 </style>
 

@@ -1,10 +1,13 @@
-import { getMusculos, insertarEjercicios } from "./api/apiEjercicios.js";
-
+import { getMusculos, getTodosDatosEjercicios, insertarEjercicios } from "./api/apiEjercicios.js";
+import TableRow from "../components/TableRow.astro";
 document.addEventListener("DOMContentLoaded", async () => {
     let musculos = await getMusculos();
     console.log(musculos);
     crearCheckboxMusculos(musculos);
+    await rellenarTabla();
 });
+
+
 
 // Mostrar el dialog al hacer clic en el botón
 const buttonInsertarEjercicio = document.getElementById("button-insertar-ejercicio");
@@ -91,5 +94,27 @@ function crearCheckboxMusculos(musculos) {
         checkbox.appendChild(label);
 
         checkboxMusculos.appendChild(checkbox);
+    });
+}
+
+async function rellenarTabla() {
+    const ejerciciosJSON = await getTodosDatosEjercicios();
+    console.log(ejerciciosJSON);
+    const divTableBody = document.querySelector('.div-table-body');
+    
+    // Limpiar la tabla antes de añadir los nuevos datos
+    divTableBody.innerHTML = '';
+
+    ejerciciosJSON.ejercicios.forEach(ejercicio => {
+        // Crear un componente TableRow con los datos de cada ejercicio
+        const row = Astro.createComponent('TableRow', {
+            nombre: ejercicio.nombre,
+            imagen: `base64:${ejercicio.imagen}`,  // Si la imagen está en formato base64
+            video: ejercicio.video,
+            //musculos: ejercicio.musculos  // Asegúrate de que "musculos" es un array
+        });
+
+        // Añadir el componente a la tabla
+        divTableBody.appendChild(row);
     });
 }
