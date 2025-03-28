@@ -38,6 +38,28 @@ export async function getMusculos() {
     }
 }
 
+export async function editarEjercicio(id, nombre, imagen, video, musculos) {
+    try {
+        const response = await fetch('http://localhost/php-fitme/editarEjercicio.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id, nombre, imagen, video, musculos })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error("Error al editar el ejercicio:", error);
+    }
+}
+
 export async function getTodosDatosEjercicios() {
     try {
         const response = await fetch('http://localhost/php-fitme/getTodosDatosEjercicios.php');
@@ -64,9 +86,9 @@ export async function getTodosDatosEjercicios() {
 }
 
 
-export async function getMusculosEjercicio(idEjercicio){
+export async function getMusculosEjercicio(idEjercicio) {
     try {
-        const response = await fetch('http://localhost/php-fitme/getTodosDatosEjercicios.php', {
+        const response = await fetch('http://localhost/php-fitme/getMusculosEjercicio.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -82,6 +104,28 @@ export async function getMusculosEjercicio(idEjercicio){
         console.log(data);
         return data;
     } catch (error) {
-        
+
+    }
+}
+
+export async function eliminarEjercicio(id) {
+    try {
+        const response = await fetch('http://localhost/php-fitme/eliminarEjercicio.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error("Error al eliminar el ejercicio:", error);
     }
 }

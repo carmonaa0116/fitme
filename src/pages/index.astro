@@ -12,8 +12,34 @@ import Hero from '../components/Hero.astro';
         <button id="button-gestion-ejercicios">Gestionar Ejercicios</button>
     </main>
 </Layout>
+<style>
+    #button-gestion-ejercicios {
+        margin: 2vw;
+        padding: 1vw;
+        border-radius: 1vw;
+
+    }
+    #button-gestion-ejercicios:hover {
+        background-color: var(--red);
+        color: var(--black);
+        transition: 0.3s;
+        animation: backgroundChange 1s infinite;
+    }
+
+    @keyframes backgroundChange {
+        0% {
+            box-shadow: 0px 0px 10px var(--black);
+        }
+        50% {
+            box-shadow: 0px 0px 10px var(--red);
+        }
+        100% {
+            box-shadow: 0px 0px 10px var(--black);
+        }
+    }
+</style>
 <script>
     document.getElementById("button-gestion-ejercicios")?.addEventListener("click", () => {
-        window.location.href = "/gesEjercicios";
+        window.location.href = "/GesEjercicios";
     });
 </script>

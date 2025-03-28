@@ -1,93 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
-import TableDiv from "../components/TableDiv.astro";
+import '../styles/gesEjercicios.css'
 ---
 
 <Layout>
     <main id="main-ges-ejercicios">
         <button id="button-insertar-ejercicio">INSERTAR EJERCICIO</button>
-        <TableDiv />
 
-        <!-- Dialog para insertar ejercicio -->
-        <dialog id="dialog-insertar-ejercicio">
-            <div>
-                <h2>Insertar Ejercicio</h2>
-                <form id="form-insertar-ejercicio">
-                    <!-- Sección del nombre -->
-                    <div>
-                        <label for="nombre">Nombre del ejercicio:</label>
-                        <input type="text" id="nombre" name="nombre" required />
-                    </div>
-
-                    <!-- Sección de imagen -->
-                    <div>
-                        <label for="imagen">Imagen del ejercicio:</label>
-                        <input
-                            type="file"
-                            id="imagen"
-                            name="imagen"
-                            accept="image/*"
-                            required
-                            style="cursor:pointer;"
-                        />
-                    </div>
-
-                    <!-- Sección del video -->
-                    <div>
-                        <label for="video">Video del ejercicio (enlace):</label>
-                        <input type="url" id="video" name="video" required />
-                    </div>
-                    <div id="div-musculos">
-                        <label for="select-musculos"
-                            >Elige los músculos implicados</label
-                        >
-                        <div id="checkbox-musculos"></div>
-                    </div>
-
-                    <!-- Botones de acción -->
-                    <div>
-                        <button type="submit">Insertar</button>
-                        <button type="button" id="cancelar"
-                            >Cerrar Ventana</button
-                        >
-                    </div>
-                </form>
-            </div>
-        </dialog>
+        <dialog id="dialog-ges-ejercicio"></dialog>
+        <div id="div-ejercicios">
+            
+        </div>
     </main>
 </Layout>
 
 <style>
-    @import url("../styles/global.css");
 
-
-    /* Botón centrado */
-    #button-insertar-ejercicio {
-        margin: 20px;
-    }
-
-    #main-ges-ejercicios {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-    }
-
-    #form-insertar-ejercicio {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    /* Añadido margen para separar cada sección */
-    #form-insertar-ejercicio div {
-        margin-bottom: 10px;
-    }
-
-    #form-insertar-ejercicio > div > input[type="text"],
-    #form-insertar-ejercicio > div > input[type="url"] {
-        width: 100%;
-    }
 </style>
 
 <script type="module" src="/src/js/scriptGesEjercicios.js"></script>

@@ -1,0 +1,173 @@
+@import url("../styles/global.css");
+
+/* Contenedor principal */
+#div-ejercicios {
+    font-family: 'Poppins';
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    transition: 0.3s;
+    margin-bottom: 10vh;
+}
+
+
+
+/* Botón centrado */
+#button-insertar-ejercicio {
+    margin: 2vw;
+    padding: 1vw;
+    border-radius: 1vw;
+}
+@keyframes backgroundChange {
+    0% {
+        box-shadow: 0px 0px 10px var(--black);
+    }
+    50% {
+        box-shadow: 0px 0px 10px var(--red);
+    }
+    100% {
+        box-shadow: 0px 0px 10px var(--black);
+    }
+}
+
+
+#button-insertar-ejercicio:hover {
+    background-color: var(--red);
+    transition: 0.3s;
+    animation: backgroundChange 1s infinite;
+}
+
+.video-link{
+    text-decoration: none;
+    color: white;   
+}
+.video-link:hover{
+    color: var(--black);
+}
+/* Sección principal */
+#main-ges-ejercicios {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Formulario de inserción */
+#form-insertar-ejercicio {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#form-insertar-ejercicio div {
+    margin-bottom: 10px;
+}
+
+/* Inputs del formulario */
+#form-insertar-ejercicio > div > input[type="text"],
+#form-insertar-ejercicio > div > input[type="url"] {
+    width: 100%;
+}
+
+/* ---------- TARJETA DEL EJERCICIO ---------- */
+
+.card-ejercicio {
+    display: grid;
+    grid-template-columns: 1fr; /* Por defecto, solo la imagen ocupa toda la tarjeta */
+    background-color: var(--gray);
+    color: var(--white);
+    border: 1px solid var(--red);
+    border-radius: 10px;
+    padding: 2vw;
+    margin: 20px;
+    width: 20vw;
+    
+    height: 20vw;
+    transition: 0.3s;
+
+}
+
+/* ---------- IMAGEN DEL EJERCICIO ---------- */
+
+.imagen-ejercicio {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    transition: width 0.3s ease-in-out;
+}
+
+.imagen-ejercicio > img {
+    width: 100%;
+    max-width: 120%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* ---------- INFORMACIÓN DEL EJERCICIO ---------- */
+
+.informacion-ejercicio {
+    background-color: var(--secundary-red);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    margin-left: 2vw;
+    padding: 2vw;
+    border-radius: 10px;
+    display: flex;
+    opacity: 0;
+    display: none;
+    visibility: hidden;
+    transition: 0.3s;
+    max-width: 10vw;
+    max-height: 27vh;
+}
+
+@media screen and (max-width: 768px) {
+    .informacion-ejercicio {
+        max-height: 27vh;
+    }
+
+    .card-ejercicio:hover {
+        grid-template-columns: 1fr 1fr; 
+        transition: 0.3s;
+        width: 30vw;
+        height: 30vw;
+        animation: backgroundChange 1s infinite;
+    }
+
+    
+}
+
+/* ---------- EFECTOS HOVER ---------- */
+
+.card-ejercicio:hover {
+    grid-template-columns: 1fr 1fr; 
+    transition: 1s;
+    width: 18vw;
+    height: 15vw;
+    animation: backgroundChange 1s infinite;
+}
+
+
+
+.card-ejercicio:hover .imagen-ejercicio {
+    width: 100%; 
+    transition: 0.3s;
+}
+
+.card-ejercicio:hover .informacion-ejercicio {
+    opacity: 1;
+    display: block;
+    visibility: visible;
+    transition: 0.3s;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin: 0 auto;
+}

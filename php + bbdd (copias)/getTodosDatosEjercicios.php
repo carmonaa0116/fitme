@@ -15,26 +15,47 @@ if (!$conexion) {
 }
 
 // Ejecutar la consulta
-$query = "SELECT * FROM ejercicios";
+$query = "SELECT 
+    e.id AS id, 
+    e.nombre AS nombre, 
+    e.imagen AS imagen, 
+    e.video AS video, 
+    m.nombre AS musculo
+FROM 
+    ejercicios e 
+JOIN 
+    ejercicio_musculo em ON em.ejercicio_id = e.id 
+JOIN 
+    musculos m ON em.musculo_id = m.id
+ORDER BY 
+    e.id;
+";
+
 $result = $conexion->query($query);
 
 if ($result->num_rows > 0) {
     $ejercicios = array();
     while ($row = $result->fetch_assoc()) {
-        // Convertir el BLOB de la imagen a base64
-        $imagenBase64 = base64_encode("data:image/jpeg;base64,".$row['imagen']);
-        
-        // Añadir los datos del ejercicio (con la imagen en base64 y el video como URL)
-        $ejercicios[] = array(
-            'id' => $row['id'],
-            'nombre' => $row['nombre'],
-            'imagen' => $imagenBase64,  // La imagen como base64
-            'video' => $row['video']   // El enlace al video de YouTube
-        );
+        $id_ejercicio = $row['id'];
+
+        // Si el ejercicio ya está en el array, solo agregamos el músculo
+        if (!isset($ejercicios[$id_ejercicio])) {
+            $ejercicios[$id_ejercicio] = [
+                'id' => $id_ejercicio,
+                'nombre' => $row['nombre'],
+                'imagen' => $row['imagen'],  // Suponiendo que es una URL
+                'video' => $row['video'],
+                'musculos' => [] // Inicializar como array vacío
+            ];
+        }
+
+        // Agregar el músculo al array
+        $ejercicios[$id_ejercicio]['musculos'][] = $row['musculo'];
     }
-    echo json_encode(['ejercicios' => $ejercicios]);
+
+    // Reindexar el array para obtener una lista ordenada
+    echo json_encode(['ejercicios' => array_values($ejercicios)]);
 } else {
     echo json_encode(['error' => 'No se encontraron ejercicios']);
 }
-
-
+?>
