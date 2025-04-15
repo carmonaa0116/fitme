@@ -1,17 +1,85 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
-import '../styles/gesEjercicios.css'
+import "../styles/gesEjercicios.css";
 ---
 
 <Layout>
     <main id="main-rutinaIA">
-        
+        <div id="div-rutinaIA">
+            <form id="form-rutinaIA">
+                <h2 style="text-align: center;">Cuéntanos sobre ti</h2>
+
+                <label for="sexo">Sexo:</label>
+                <select name="sexo" id="sexo" required>
+                    <option value="">Selecciona</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                    <option value="otro">Otro</option>
+                </select>
+
+                <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+                <input
+                    type="date"
+                    id="fecha_nacimiento"
+                    name="fecha_nacimiento"
+                    max="${new Date().toISOString().split('T')[0]}"
+                    required
+                />
+
+                <label for="experiencia">Nivel de experiencia:</label>
+                <select name="experiencia" id="experiencia" required>
+                    <option value="">Selecciona</option>
+                    <option value="principiante">Principiante</option>
+                    <option value="intermedio">Intermedio</option>
+                    <option value="avanzado">Avanzado</option>
+                </select>
+
+                <label for="objetivo">Objetivo:</label>
+                <select name="objetivo" id="objetivo" required>
+                    <option value="">Selecciona</option>
+                    <option value="ganar masa muscular">Ganar masa muscular</option>
+                    <option value="perder grasa">Perder grasa</option>
+                    <option value="mantenerse">Mantenerse</option>
+                </select>
+
+                <label for="dias_entreno">Días de entrenamiento por semana:</label>
+                <input
+                    type="number"
+                    id="dias_entreno"
+                    name="dias_entreno"
+                    min="1"
+                    max="7"
+                    step="1"
+                    required
+                    value="1"
+                />
+
+                <button type="submit">Generar rutina</button>
+            </form>
+        </div>
     </main>
 </Layout>
 
 <style>
+    @import "../styles/global.css";
 
+    #form-rutinaIA {
+        color: white;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--gray);
+        color: var(--white);
+        border: 1px solid var(--red);
+        border-radius: 10px;
+        padding: 5vw;
+        margin: 20px;
+        width: 20vw;
+        gap: 1vw;
+        max-height: 60vw;
+        max-width: 50vw;
+        transition: 0.3s;
+    }
 </style>
 
 <script type="module" src="/src/js/scriptRutinaIA.js"></script>

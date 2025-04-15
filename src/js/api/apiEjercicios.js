@@ -129,3 +129,47 @@ export async function eliminarEjercicio(id) {
         console.error("Error al eliminar el ejercicio:", error);
     }
 }
+
+export async function comprobarUsuario(nombre_usuario) {
+    try {
+        const response = await fetch('http://localhost/php-fitme/comprobarUsrRegister.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ nombre_usuario: nombre_usuario })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function registrar(datos) {
+    try {
+        const response = await fetch('http://localhost/php-fitme/registro.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datos)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+        return { error: 'No se pudo registrar el usuario. Inténtalo más tarde.' };
+    }
+}

@@ -1,0 +1,131 @@
+---
+import NoSessionLayout from "../layouts/NoSessionLayout.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+---
+
+<NoSessionLayout>
+    <main id="main-registro">
+        <div id="div-registro">
+            <form id="form-registro">
+                <h2 style="text-align: center;">Registro</h2>
+
+                <div id="divNombreUsuario">
+                    <label for="nombre_usuario">Nombre de usuario:</label>
+                    <input
+                        type="text"
+                        id="nombre_usuario"
+                        name="nombre_usuario"
+                        required
+                    />
+                    <p id="mensajeNU"></p>
+                </div>
+
+                <div>
+                    <label for="contrasena">Contraseña:</label>
+                    <input
+                        type="password"
+                        id="contrasena"
+                        name="contrasena"
+                        required
+                    />
+                </div>
+
+                <div>
+                    <label for="nombre">Nombre completo:</label>
+                    <input type="text" id="nombre" name="nombre" required />
+                </div>
+
+                <div>
+                    <label for="sexo">Sexo:</label>
+                    <select name="sexo" id="sexo" required>
+                        <option value="">Selecciona</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="femenino">Femenino</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+                    <input
+                        type="date"
+                        id="fecha_nacimiento"
+                        name="fecha_nacimiento"
+                        required
+                    />
+                </div>
+
+                <div>
+                    <label for="experiencia">Nivel de experiencia:</label>
+                    <select name="experiencia" id="experiencia" required>
+                        <option value="">Selecciona</option>
+                        <option value="principiante">Principiante</option>
+                        <option value="intermedio">Intermedio</option>
+                        <option value="avanzado">Avanzado</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="altura">Altura (cm):</label>
+                    <input
+                        type="number"
+                        step="0.01"
+                        id="altura"
+                        name="altura"
+                        placeholder="Ej: 180.5"
+                        required
+                    />
+                </div>
+
+                <div>
+                    <label for="peso">Peso (kg):</label>
+                    <input
+                        type="number"
+                        step="0.01"
+                        id="peso"
+                        name="peso"
+                        placeholder="Ej: 75.25"
+                        required
+                    />
+                </div>
+                <button type="submit">Crear cuenta</button>
+            </form>
+        </div>
+    </main>
+</NoSessionLayout>
+
+<style>
+    #form-registro {
+        color: var(--white);
+        display: flex;
+        flex-direction: column;
+        background-color: var(--gray);
+        border: 1px solid var(--red);
+        border-radius: 10px;
+        padding: 5vw;
+        margin-top: 5vh;
+        width: 95%;
+        max-width: 800px;
+        gap: 1vw;
+        transition: 0.3s;
+    }
+
+    @media (min-width: 768px) {
+        #form-registro {
+            margin-top: 10vh;
+            width: 80%;
+            max-width: 1000px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        #form-registro {
+            margin-top: 15vh;
+            width: 60%;
+            max-width: 1200px;
+        }
+    }
+</style>
+
+<script type="module" src="/src/js/registro.js"></script>
