@@ -19,3 +19,4 @@ Actualmente, este proyecto se encuentra en fase de producción. Debido a esto, l
 3. Ejecutar el frontend con el siguiente comando en la raíz del proyecto Astro:
    ```sh
    npm run dev
+

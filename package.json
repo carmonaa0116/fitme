@@ -10,12 +10,13 @@
     "api": "node src/server/server.js"
   },
   "devDependencies": {
-    "astro": "^5.6.2"
+    "astro": "^5.7.4"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "gsap": "^3.12.7"
+    "gsap": "^3.12.7",
+    "puter": "^1.0.0"
   }
 }

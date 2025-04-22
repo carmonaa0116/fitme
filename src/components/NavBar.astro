@@ -23,26 +23,29 @@
             </svg>
         </a>
     </div>
+    <button id="menuToggle" aria-label="Toggle Navigation"> ☰ </button>
     <ul id="navigation">
         <ul id="navigation-buttons">
-            <li><a href="/">Inicio</a></li>
-            <li><a href="/GesEjercicios">Ejercicios</a></li>
+            <li><a href="/Home">Inicio</a></li>
+            <li><a href="/Rutinas">Mis rutinas</a></li>
             <li><a href="">Precios</a></li>
-            <li><a href="/RutinaIA">Genera Rutina</a></li>
         </ul>
-        <ul id="login-register">
-            <li>
-                <button id="login-button-navBar">Inicio Sesión</button>
-            </li>
-            <li>
-                <button id="register-button-navBar">Registro</button>
-            </li>
-        </ul>
+    </ul>
+    <ul id="user-navBar">
+        <a href="/Perfil">
+            <img
+                src="../src/assets/user-icon.png"
+                alt="User Profile"
+                id="user-icon"
+            />
+            <span>Mi Perfil</span>
+        </a>
     </ul>
 </nav>
 <style>
     @import url(../styles/global.css);
     @import url(../assets/font/font.css);
+
     #navBar {
         font-family: "Poppins", sans-serif;
         font-weight: 600;
@@ -50,10 +53,12 @@
         height: 100px;
         justify-content: space-between;
         align-items: center;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
         position: sticky;
         margin: 2vw;
+        padding: 0 2vw;
     }
+
     #logoNavBar {
         height: 50px;
         width: auto;
@@ -63,11 +68,13 @@
         width: inherit;
         height: inherit;
     }
+
     #navigation {
         display: flex;
         align-items: center;
         height: 50px;
     }
+
     #navigation-buttons {
         display: flex;
         justify-content: center;
@@ -80,11 +87,13 @@
         text-decoration: none;
         height: 100%;
     }
+
     #navigation-buttons > li > a {
         color: var(--white);
         text-decoration: none;
         transition: 0.5s;
     }
+
     #navigation-buttons > li {
         transition: 0.5s;
     }
@@ -96,49 +105,147 @@
         transition: 0.5s;
     }
 
-    #login-register {
+    #user-navBar {
         display: flex;
-        list-style: none;
-        margin-left: 1vw;
-        padding: 0;
-        gap: 1vw;
-        height: 100%;
-    }
-    #login-register > li {
-        display: flex;
-        justify-content: center;
         align-items: center;
-    }
-    #register-button-navBar {
+        justify-content: center;
+        list-style: none;
+        margin-right: 2vw;
+        padding: 1vw;
+        border-radius: 10px;
+        margin-left: 5vw;
         background-color: var(--red);
     }
-    #register-button-navBar,
-    #login-button-navBar {
+
+    #user-navBar > a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: var(--white);
         height: 100%;
         transition: 0.5s;
-        width: 100px;
-        border-radius: 10px;
     }
-    #register-button-navBar:hover,
-    #login-button-navBar:hover {
-        height: 100%;
-        width: 150px;
-        border-radius: 10px;
+
+    #user-navBar > a:hover {
+        text-decoration: none;
+        color: var(--white);
+        opacity: 0.8;
         transition: 0.5s;
-        animation: backgroundChange 2s infinite;
     }
-    @keyframes backgroundChange {
-        0% {
-            box-shadow: 0px 0px 10px var(--black);
+
+    #user-icon {
+        width: 1.5vw;
+        height: auto;
+        border-radius: 50%;
+        margin-right: 1vw;
+    }
+
+    /* Ocultar el botón en pantallas grandes */
+    #menuToggle {
+        color: var(--red);
+        background: none;
+        display: none;
+    }
+
+    /* Mostrar el botón solo en pantallas móviles (máximo 768px) */
+    @media (max-width: 768px) {
+        #menuToggle {
+            display: block;
         }
-        50% {
-            box-shadow: 0px 0px 10px var(--red);
+
+        #navigation {
+            display: none; /* Ocultar la navegación por defecto */
+            width: 100%; /* Aseguramos que ocupe todo el ancho */
+            height: 100%;
+            position: absolute; /* Lo hacemos flotar sobre el contenido */
+            top: 0;
+            left: 0;
+            background-color: #333; /* Fondo oscuro para el menú */
+            padding: 20px 0; /* Espaciado alrededor */
+            z-index: 9999; /* Aseguramos que esté sobre otros elementos */
         }
-        100% {
-            box-shadow: 0px 0px 10px var(--black);
+
+        #navigation.open {
+            display: block; /* Mostrar la navegación cuando se active */
+        }
+
+        #navigation-buttons {
+            flex-direction: column;
+            justify-content: center; /* Centrado vertical de los elementos */
+            align-items: center; /* Centrado horizontal de los elementos */
+            gap: 1vw;
+            padding: 0; /* Quitamos los márgenes predeterminados */
+        }
+
+        #navigation-buttons > li {
+            width: 100%; /* Para que los elementos ocupen todo el ancho */
+            text-align: center; /* Aseguramos que los enlaces se centren */
+        }
+
+        #navigation-buttons > li > a {
+            color: white;
+            text-decoration: none;
+            padding: 10px; /* Espaciado alrededor de los enlaces */
+            display: block;
+            text-align: center; /* Centrado del texto dentro del enlace */
+            transition: 0.5s;
+        }
+
+        #navigation-buttons > li:hover {
+            color: var(--white);
+            text-decoration: none;
+            transform: scale(1.1);
+            transition: 0.5s;
+        }
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        #navBar {
+            align-items: center;
+            flex-direction: column;
+            height: auto;
+            padding: 1vw;
+        }
+
+        #user-navBar {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        #user-icon {
+            width: 30px;
+            margin-right: 0.5vw;
+        }
+    }
+
+    @media (max-width: 480px) {
+        #navBar {
+            padding: 1vw;
+        }
+
+        #navigation-buttons {
+            font-size: 14px;
+        }
+
+        #user-icon {
+            width: 25px;
         }
     }
 </style>
 <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navigation = document.getElementById("navigation");
 
+    if (menuToggle && navigation) {
+        menuToggle.addEventListener("click", function () {
+            navigation.classList.toggle("open");
+        });
+        document.addEventListener("click", function (event) {
+            if (!navigation.contains(event.target as Node) && !menuToggle.contains(event.target as Node)) {
+                navigation.classList.remove("open");
+            }
+        });
+    }
 </script>
