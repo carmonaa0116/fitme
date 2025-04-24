@@ -1,0 +1,142 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+    <main>
+        <h1>Ejercicios de la rutina</h1>
+        <div id="diasRutina"></div>
+        <button id="buttonEliminarRutina">Eliminar Rutina</button>
+        <dialog id="dialogAgregarEjercicio">
+
+        </dialog>
+    </main>
+    <script type="module" src="/src/js/ejerciciosRutina.js"></script>
+</Layout>
+<style>
+    @import url("../styles/global.css");
+
+
+
+    #diasRutina {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin: 20px auto;
+        max-width: 1200px;
+        padding: 20px;
+        border-radius: 12px;
+        background-color: var(--gray);
+    }
+
+    #diasRutina > div {
+        background-color: var(--white);
+        padding: 20px;
+        border-radius: 12px;
+        height: 100%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border: 1px solid #e6e6e6;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    #diasRutina > div:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    #diasRutina > div h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: var(--black);
+        font-weight: bold;
+    }
+
+    #diasRutina > div p {
+        font-size: 1.2rem;
+        color: #666666;
+        margin-bottom: 1rem;
+    }
+
+    #diasRutina > div ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    #diasRutina > div ul li {
+        margin-bottom: 0.8rem;
+        color: #444444;
+        font-size: 1rem;
+    }
+    .detalleEjercicio {
+        margin-top: 1vh;
+        padding: 10px;
+        background-color: #f4f4f4;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+    }
+
+    #diasRutina > div ul li .detalleEjercicio {
+        margin-top: 1vh;
+        padding: 10px;
+        background-color: #f4f4f4;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+    }
+
+    #diasRutina > div ul li .detalleEjercicio li {
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+        color: #555555;
+    }
+
+    .idRecibido {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: var(--black);
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    @media screen and (max-width: 768px) {
+        #diasRutina {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        #diasRutina > div {
+            padding: 1rem;
+        }
+
+        #diasRutina > div h2 {
+            font-size: 1.6rem;
+        }
+
+        #diasRutina > div p {
+            font-size: 1rem;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        #diasRutina {
+            grid-template-columns: 1fr;
+        }
+
+        #diasRutina > div h2 {
+            font-size: 1.4rem;
+        }
+
+        #diasRutina > div p {
+            font-size: 0.95rem;
+        }
+
+        #diasRutina > div button {
+            font-size: 0.9rem;
+            padding: 10px 14px;
+        }
+    }
+</style>

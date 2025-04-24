@@ -98,7 +98,7 @@
 
 @font-face {
     font-family: 'Poppins';
-    src: url('/src/assets/font/Poppins-SemiBold.ttf') format('truetype');
+    src: url('/src/assets/font/PoppinsBold.ttf') format('truetype');
     font-weight: 600;
     font-style: normal;
 }

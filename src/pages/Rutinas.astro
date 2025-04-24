@@ -15,86 +15,94 @@ import "../styles/gesEjercicios.css";
 
     <!-- Diálogo para crear rutina -->
     <dialog id="dialog-crear-rutina" class="dialog-crear-rutina">
-      <form
-        method="dialog"
-        id="form-crear-rutina"
-        class="dialog-crear-rutina"
-      >
+      <form method="dialog" id="form-crear-rutina" class="dialog-crear-rutina">
         <h2>Crea una rutina</h2>
         <label for="nombre-rutina">Nombre de la rutina:</label>
         <input type="text" id="nombre-rutina" required />
-        <label for="dias-semana">Selecciona los días de la semana:</label>
-        <select id="dias-semana" multiple required>
-          <option value="Lunes">Lunes</option>
-          <option value="Martes">Martes</option>
-          <option value="Miércoles">Miércoles</option>
-          <option value="Jueves">Jueves</option>
-          <option value="Viernes">Viernes</option>
-          <option value="Sábado">Sábado</option>
-          <option value="Domingo">Domingo</option>
-        </select>
-        <button type="submit" id="btn-crear-rutina-confirmar">Crear Rutina</button>
+        <label>Selecciona los días de la semana:</label>
+        <div id="checkbox-dias" class="checkbox-dias">
+          <label class="labelDiaSemana">
+            <input type="checkbox" value="Lunes" class="inputDiaSemana" /> Lunes
+          </label>
+          <label class="labelDiaSemana">
+            <input type="checkbox" value="Martes" class="inputDiaSemana" /> Martes
+          </label>
+          <label class="labelDiaSemana">
+            <input type="checkbox" value="Miércoles" class="inputDiaSemana" /> Miércoles
+          </label>
+          <label class="labelDiaSemana">
+            <input type="checkbox" value="Jueves" class="inputDiaSemana" /> Jueves
+          </label>
+          <label class="labelDiaSemana">
+            <input type="checkbox" value="Viernes" class="inputDiaSemana" /> Viernes
+          </label>
+          <label class="labelDiaSemana">
+            <input type="checkbox" value="Sábado" class="inputDiaSemana" /> Sábado
+          </label>
+          <label class="labelDiaSemana">
+            <input type="checkbox" value="Domingo" class="inputDiaSemana" /> Domingo
+          </label>
+        </div>
+
+        <button type="submit" id="btn-crear-rutina-confirmar"
+          >Crear Rutina</button
+        >
       </form>
       <button id="btn-cerrar-dialogo">Cerrar</button>
     </dialog>
   </main>
 
-  <script type="module">
-    // Obtener elementos del DOM
-    const btnCrearRutina = document.getElementById("btn-crear-rutina");
-    const dialogoCrearRutina = document.getElementById("dialog-crear-rutina");
-    const btnCerrarDialogo = document.getElementById("btn-cerrar-dialogo");
-    const formCrearRutina = document.getElementById("form-crear-rutina");
-    const divRutinas = document.getElementById("div-rutinas");
-
-    // Abrir el diálogo al hacer clic en el botón "Crear una rutina"
-    btnCrearRutina.addEventListener("click", () => {
-      dialogoCrearRutina.showModal(); // Abre el diálogo
-    });
-
-    // Cerrar el diálogo al hacer clic en el botón "Cerrar"
-    btnCerrarDialogo.addEventListener("click", () => {
-      dialogoCrearRutina.close(); // Cierra el diálogo
-    });
-
-    // Manejar el envío del formulario
-    formCrearRutina.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const nombreRutina = document.getElementById("nombre-rutina").value;
-      const diasSeleccionados = Array.from(
-        document.getElementById("dias-semana").selectedOptions
-      ).map(option => option.value);
-
-      // Validación simple (se puede personalizar según necesidades)
-      if (!nombreRutina || diasSeleccionados.length === 0) {
-        alert("Por favor, completa todos los campos.");
-        return;
-      }
-
-      // Crear un objeto con los datos de la rutina
-      const nuevaRutina = {
-        nombre: nombreRutina,
-        dias: diasSeleccionados,
-      };
-
-      // Aquí podrías hacer una llamada a la API para guardar la rutina en la base de datos
-      console.log("Nueva rutina creada:", nuevaRutina);
-
-      // Cerrar el diálogo
-      dialogoCrearRutina.close();
-
-      // Opcional: Mostrar la nueva rutina en la interfaz de usuario
-      divRutinas.innerHTML += `
-        <div class="dia-rutina">
-          <h2>Rutina: ${nuevaRutina.nombre}</h2>
-          <p>Días seleccionados: ${nuevaRutina.dias.join(", ")}</p>
-        </div>
-      `;
-    });
-  </script>
-
+  <script type="module" src="/src/js/rutinas.js"></script>
   <style>
+    #div-rutinas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 1rem;
+      margin-top: 1rem;
+      overflow-y:scroll;
+      max-height: 100vh;
+      margin-bottom: 50vh;
+    }
+    .rutina {
+      background-color: red;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-height: 2vh; /* Altura fija */
+      max-height: 2vh; /* Altura fija */
+      line-height: 2rem; /* Alineación del texto dentro de la altura */
+    }
+    .checkbox-dias {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .labelDiaSemana {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem;
+      border-radius: 8px;
+      background-color: #333;
+      color: white;
+      cursor: pointer;
+      transition:
+        background-color 0.3s,
+        color 0.3s;
+    }
+
+    .labelDiaSemana.activo {
+      background-color: var(--red);
+      color: white;
+    }
+
+    .inputDiaSemana {
+      accent-color: var(--red);
+    }
+
     #main-vista-rutina {
       padding: 2rem;
       background-color: var(--background);
@@ -102,8 +110,14 @@ import "../styles/gesEjercicios.css";
     }
 
     .contenedor-rutina {
-      max-width: 800px;
-      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: left;
+      max-width: 80vw;
+      text-align: center;
+      margin: 1vw;
+      overflow-wrap:break-word;
+
     }
 
     .info-usuario {
@@ -129,9 +143,12 @@ import "../styles/gesEjercicios.css";
 
     #dialog-crear-rutina {
       padding: 1rem;
-      background-color: var(--background);
+      background-color: var(--black);
       border-radius: 10px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    .dialog-crear-rutina > * {
+      margin: 1rem 0; /* Márgenes verticales de 1rem */
     }
 
     button {
@@ -142,14 +159,8 @@ import "../styles/gesEjercicios.css";
       border-radius: 5px;
     }
 
-    select {
-      width: 100%;
-      padding: 0.5rem;
-      margin-bottom: 1rem;
-      border-radius: 5px;
-    }
-
-    input {
+    select,
+    input[type="text"] {
       width: 100%;
       padding: 0.5rem;
       margin-bottom: 1rem;

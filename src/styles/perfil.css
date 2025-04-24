@@ -1,0 +1,133 @@
+@import url(../assets/font/font.css);
+@import url(../styles/global.css);
+:root {
+  --red: #e63946;
+  --secundary-red: #d62828;
+  --white: #ffffff;
+  --gray: #ccc;
+}
+
+#profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  width: 100%;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.profile-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1000px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+}
+
+.profile-image {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-image img {
+  width: 200px;
+  height: 200px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: var(--red);
+}
+
+.profile-details {
+  max-width: 600px;
+  flex: 1;
+  text-align: center;
+}
+
+.profile-details p {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+#editProfileBtn {
+  background-color: var(--red);
+  color: var(--white);
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+#editProfileBtn:hover {
+  background-color: var(--secundary-red);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  background-color: transparent;
+  color: var(--white);
+  border: none;
+  border-bottom: 1px solid var(--gray);
+  padding: 8px 12px;
+  width: 100%;
+  box-sizing: border-box;
+  transition:
+    border-color 0.3s ease,
+    font-size 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-bottom: 1px solid var(--red);
+  font-size: 105%;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .profile-content {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+
+  .profile-image img {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .profile-header p {
+    font-size: 1rem;
+  }
+
+  .profile-details p {
+    font-size: 0.9rem;
+  }
+
+  #editProfileBtn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}

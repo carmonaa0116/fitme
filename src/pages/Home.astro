@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
+import Tutorial from '../components/Tutorial.astro';
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
@@ -10,6 +11,7 @@ import Hero from '../components/Hero.astro';
     <main>
 
     </main>
+    <Tutorial />
 </Layout>
 <style>
     #button-gestion-ejercicios {
@@ -38,15 +40,5 @@ import Hero from '../components/Hero.astro';
     }
 </style>
 <script>
-    document.getElementById("button-gestion-ejercicios")?.addEventListener("click", () => {
-        window.location.href = "/GesEjercicios";
-    });
-    document.addEventListener('DOMContentLoaded', () => {
-        if (sessionStorage.getItem("usuario")) {
-            console.log("Usuario autenticado.");
-        } else {
-            alert("No estás autenticado. Redirigiendo a la página principal...");
-            window.location.href = "/";
-        }
-    });
+
 </script>

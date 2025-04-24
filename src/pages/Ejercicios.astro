@@ -1,0 +1,102 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getTodosDatosEjercicios } from "../js/api/apiEjercicios.js";
+---
+
+<Layout>
+    <main></main>
+</Layout>
+
+<style>
+    .ejercicios {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .ejercicio {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 16px;
+        text-align: center;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+        cursor: pointer;
+    }
+
+    .ejercicio:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .ejercicio h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .ejercicio p {
+        font-size: 1rem;
+        margin-bottom: 15px;
+        color: #666;
+    }
+
+    .ejercicio img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+    }
+
+    dialog {
+        border: none;
+        border-radius: 10px;
+        padding: 20px;
+        width: 90%;
+        max-width: 400px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    form label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    form input,
+    form textarea {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+    }
+
+    .acciones {
+        margin-top: 15px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .acciones button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .acciones button[type="submit"] {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .acciones button[type="button"] {
+        background-color: #dc3545;
+        color: white;
+    }
+</style>
