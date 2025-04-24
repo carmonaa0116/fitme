@@ -23,7 +23,7 @@ $data = json_decode(file_get_contents("php://input"));
 $id_usuario = $data->id_usuario;
 
 // Preparar la consulta SQL para obtener las rutinas del usuario
-$sql = "SELECT * FROM rutinas WHERE usuario_id = ?";
+$sql = "SELECT * FROM rutinas WHERE idUsuario = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id_usuario); // "i" significa que el parámetro es un entero
 $stmt->execute();
@@ -36,7 +36,8 @@ if ($result->num_rows > 0) {
         // Almacenar cada rutina en el array
         $rutinas[] = [
             "id" => $row["id"],
-            "rutina" => $row["rutina"],
+            "nombre" => $row["nombre"],
+            "dias" => explode(',', $row["dias"]), // Convertir el string de días a un array
             // Puedes agregar más campos si es necesario
         ];
     }

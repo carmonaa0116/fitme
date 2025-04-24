@@ -14,9 +14,8 @@ $data = json_decode(file_get_contents("php://input"), true);
 if (isset($data['idUsuario'])) {
     $idUsuario = $data['idUsuario'];
 
-    // Consultar la base de datos para obtener los datos del usuario
-    $sql = "SELECT id, nombre_usuario, nombre, sexo, fecha_nacimiento, experiencia, altura, peso, fecha_registro, email 
-            FROM usuarios WHERE id = ?";
+    // Consultar la base de datos para obtener el campo foto_perfil
+    $sql = "SELECT foto_perfil FROM usuarios WHERE id = ?";
     
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("i", $idUsuario);
@@ -25,13 +24,13 @@ if (isset($data['idUsuario'])) {
 
     // Verificar si se encontró un usuario con el id proporcionado
     if ($resultado->num_rows > 0) {
-        // Obtener los datos del usuario
+        // Obtener el campo foto_perfil
         $usuario = $resultado->fetch_assoc();
         // Devolver los datos en formato JSON
-        echo json_encode($usuario);
+        echo json_encode(["foto_perfil" => base64_encode($usuario['foto_perfil'])]);
     } else {
         // Si no se encuentra el usuario, devolver un error
-        echo json_encode(["error" => "Usuario no encontrado"]);
+        echo json_encode(["foto_perfil" => "null", "error" => "Usuario no encontrado"]);
     }
 
     $stmt->close();

@@ -5,11 +5,6 @@ header("Access-Control-Allow-Headers: Content-Type"); // Permitir estos encabeza
 header('Content-Type: application/json; charset=utf-8');
 
 // Establecer conexión con la base de datos
-$host = 'localhost';
-$user = 'tu_usuario';
-$pass = 'tu_contraseña';
-$db = 'nombre_de_tu_base_de_datos';
-
 // Crear la conexión
 require_once 'conexion.php'; // Asegúrate de que este archivo contenga la conexión a la base de datos
 
