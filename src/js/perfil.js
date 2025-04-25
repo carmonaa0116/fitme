@@ -36,6 +36,8 @@ async function cargarContenidoUsuario() {
             : '/src/assets/user-icon.png';
     }
 
+    console.log(perfil_img.src);
+
     perfil_usuario.textContent = datosUsuario.nombre_usuario;
     perfil_nombre.textContent = datosUsuario.nombre;
     perfil_correo.textContent = datosUsuario.email;

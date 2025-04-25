@@ -1,0 +1,174 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+    <main>
+        <dialog id="editProfileDialog"></dialog>
+
+        <section id="profile">
+
+            <div class="profile-content">
+                <h2>Foto de perfil</h2>
+                <div class="perfil_img">
+                    <img
+                        src="data:image/*;base64"
+                        alt="Imagen de perfil"
+                        id="profile-img"
+                        onerror="this.onerror=null; this.src='/src/assets/user-icon.png';"
+                    />
+                </div>
+                <div class="profile-details">
+                    <h2>Detalles del perfil</h2>
+                    <p>
+                        <strong>Nombre de usuario:</strong>
+                        <span id="perfil_usuario">null</span>
+                    </p>
+                    <p>
+                        <strong>Nombre:</strong>
+                        <span id="perfil_nombre">null</span>
+                    </p>
+                    <p>
+                        <strong>Correo electrónico:</strong>
+                        <span id="perfil_correo">null</span>
+                    </p>
+                    <p>
+                        <strong>Sexo:</strong>
+                        <span id="perfil_sexo">null</span>
+                    </p>
+                    <p>
+                        <strong>Fecha de nacimiento:</strong>
+                        <span id="perfil_fechaNac">null</span>
+                    </p>
+                    <p>
+                        <strong>Experiencia:</strong>
+                        <span id="perfil_experiencia">null</span>
+                    </p>
+                    <p>
+                        <strong>Altura:</strong>
+                        <span id="perfil_altura">null</span>
+                    </p>
+                    <p>
+                        <strong>Peso:</strong>
+                        <span id="perfil_peso">null</span> kg
+                    </p>
+                    <button id="friend-request-button">Enviar solicitud de amistad</button>
+                </div>
+            </div>
+            
+        </section>
+        <section>
+            <h1>Rutinas</h1>
+            <div id="routines-container"></div>
+        </section>
+        
+    </main>
+</Layout>
+
+<style>
+    @import url(../assets/font/font.css);
+    @import url(../styles/global.css);
+
+    #profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+        width: 100%;
+    }
+
+    .profile-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .profile-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        width: 100%;
+        max-width: 1000px;
+        border-radius: 12px;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.295);
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .perfil_img {
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        border: 1px solid var(--black);
+    }
+
+    .profile-image img {
+        width: 200px;
+        height: 200px;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .profile-details {
+        max-width: 600px;
+        flex: 1;
+        text-align: center;
+    }
+
+    .profile-details p {
+        font-size: 1rem;
+        margin: 10px 0;
+    }
+
+
+
+    @media (min-width: 769px) {
+        .profile-content {
+            flex-direction: row;
+            padding: 2rem;
+        }
+
+        .perfil_img img {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .profile-content {
+            flex-direction: column;
+            padding: 1.5rem;
+        }
+
+        .perfil_img img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .profile-header h1 {
+            font-size: 1.5rem;
+        }
+
+        .profile-header p {
+            font-size: 1rem;
+        }
+
+        .perfil_img img {
+            width: 250px;
+            height: auto;
+        }
+
+        .profile-details p {
+            font-size: 0.9rem;
+        }
+    }
+</style>
+<script type="module" src="/src/js/verUsuario.js"></script>

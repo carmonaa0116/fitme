@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .sort((a, b) => ordenDias.indexOf(a) - ordenDias.indexOf(b));
 
         for (const dia of diasArray) {
+            const btnEliminarRutina = document.getElementById("buttonEliminarRutina");
             const ejerciciosRutinaDia = await getEjerciciosPorDia(idRecibido, dia);
             const divDia = document.createElement("div");
             divDia.classList.add("diaRutina");
@@ -67,6 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const ejerciciosJSON = await getTodosDatosEjercicios();
 
             botonAgregar.addEventListener("click", () => {
+                btnEliminarRutina.disabled = true;
+                btnEliminarRutina.style.cursor = "not-allowed";
                 dialogAgregarEjercicio.innerHTML = `
                     <div class="dialogContent">
                         <h3>Agregar Ejercicio para ${dia}</h3>
@@ -94,6 +97,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 dialogAgregarEjercicio.style.display = "block";
                 document.getElementById("btnCancelar").addEventListener("click", () => {
                     dialogAgregarEjercicio.style.display = "none";
+                    btnEliminarRutina.disabled = false;
+                    btnEliminarRutina.style.cursor = "pointer";
                 });
 
                 document.getElementById("formAgregarEjercicio").addEventListener("submit", async (event) => {
@@ -117,7 +122,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     const repeticionesEjercicio = detalle.querySelector('.repeticionesEjercicio').textContent.split(": ")[1];
                     const pesoEjercicio = detalle.querySelector('.pesoEjercicio') ? detalle.querySelector('.pesoEjercicio').textContent.split(": ")[1] : '';
                     const dialogEditarEliminar = document.getElementById("dialogAgregarEjercicio");
-
+                    btnEliminarRutina.disabled = true;
+                    btnEliminarRutina.style.cursor = "not-allowed";
                     dialogEditarEliminar.innerHTML = `
                         <div class="dialogContent">
                             <h3>Editar o Eliminar Ejercicio</h3>
@@ -147,6 +153,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     document.getElementById("btnCancelar").addEventListener("click", () => {
                         dialogEditarEliminar.style.display = "none";
+                        btnEliminarRutina.disabled = false;
+                        btnEliminarRutina.style.cursor = "pointer";
                     });
 
                     document.getElementById("btnEliminarEjercicio").addEventListener("click", async () => {

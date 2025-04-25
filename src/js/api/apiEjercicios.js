@@ -22,6 +22,34 @@ export async function insertarEjercicios(formData) {
     }
 }
 
+export async function getResultadosBusquedaUsr(nombreUsr) {
+    try {
+        const response = await fetch('http://localhost/php-fitme/getResultadosBusquedaUsr.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ nombreUsr: nombreUsr })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.error) {
+            console.error(data.error);
+            return [];
+        }
+
+        return data.usuarios || [];
+    } catch (error) {
+        console.error("Error al obtener los resultados de búsqueda:", error);
+        return [];
+    }
+}
+
 export async function getMusculos() {
     try {
         const response = await fetch('http://localhost/php-fitme/getMusculos.php');
@@ -474,6 +502,28 @@ export async function getRutina(id) {
 
         if (!response.ok) {
             throw new Error("Error al obtener la rutina");
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error:", error);
+        return null; // Devolver null en caso de error
+    }
+}
+
+export async function getUnUsuario(idUsuario){
+    try {
+        const response = await fetch('http://localhost/php-fitme/getUnUsuario.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id_usuario: idUsuario })
+        });
+
+        if (!response.ok) {
+            throw new Error("Error al obtener el usuario");
         }
 
         const data = await response.json();
