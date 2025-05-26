@@ -1,5 +1,5 @@
-// /src/js/login.js
 import { login } from "./api/apiEjercicios.js";
+
 document.getElementById("form-login").addEventListener("submit", async function (event) {
     event.preventDefault(); // Evitar que se recargue la página
 
@@ -19,9 +19,16 @@ document.getElementById("form-login").addEventListener("submit", async function 
             // Redirigir al usuario (por ejemplo, a la página principal)
             window.location.href = '/Home'; // Cambiar a la ruta adecuada después del login
         }
-
     } catch (error) {
-        // Si el login falla, mostrar el mensaje de error
-        alert(error.message);
+        // Mostrar el error en el dialog
+        const dialog = document.getElementById("login-error-dialog");
+        const message = document.getElementById("login-error-message");
+        message.textContent = error.message || "Ha ocurrido un error al iniciar sesión.";
+        dialog.showModal();
+
+        // Cerrar el dialog al hacer click en el botón
+        document.getElementById("close-error-dialog").onclick = () => {
+            dialog.close();
+        };
     }
 });

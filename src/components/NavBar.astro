@@ -41,6 +41,32 @@
             <span>Mi Perfil</span>
         </a>
     </ul>
+    <div id="notifications-container">
+        <button id="notifications-btn" aria-label="Ver notificaciones">
+            <svg
+                id="bell-icon"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+            >
+                <path
+                    d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 0 0 2 2zm6-6V11c0-3.07-1.63-5.64-5-6.32V4a1 1 0 1 0-2 0v.68C7.63 5.36 6 7.92 6 11v5l-1.29 1.29A1 1 0 0 0 6 19h12a1 1 0 0 0 .71-1.71L18 17z"
+                    fill="#fff"></path>
+            </svg>
+            <span id="notifications-count">0</span>
+        </button>
+        <div id="notifications-panel" class="hidden">
+            <div class="notifications-header">Notificaciones</div>
+            <ul class="notifications-list">
+                <li>No tienes notificaciones.</li>
+            </ul>
+        </div>
+        <dialog id="friendRequestDialog">
+            <p id="dialogMessage">Solicitud procesada</p>
+            <button id="closeDialogBtn">Cerrar</button>
+        </dialog>
+    </div>
 </nav>
 <style>
     @import url(../styles/global.css);
@@ -112,6 +138,7 @@
         list-style: none;
         margin-right: 2vw;
         padding: 1vw;
+        height: 2vh;
         border-radius: 10px;
         margin-left: 5vw;
         background-color: var(--red);
@@ -197,6 +224,101 @@
             text-decoration: none;
             transform: scale(1.1);
             transition: 0.5s;
+        }
+    }
+
+    #notifications-container {
+        position: relative;
+        margin-left: 2vw;
+    }
+    #notifications-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5vw;
+        border-radius: 50%;
+        transition: background 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    #notifications-btn:hover {
+        background: rgba(219, 76, 68, 0.15);
+    }
+    #bell-icon {
+        display: block;
+    }
+    #notifications-count {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        transform: translate(40%, 40%);
+        background: var(--red);
+        color: #fff;
+        font-size: 0.8em;
+        font-weight: bold;
+        border-radius: 50%;
+        min-width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        pointer-events: none;
+        z-index: 1;
+    }
+    #notifications-panel {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 120%;
+        min-width: 220px;
+        background: var(--black);
+        color: #222;
+        border-radius: 10px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        z-index: 10000;
+        padding: 0.5em 0;
+        font-weight: 400;
+    }
+    #notifications-panel:not(.hidden) {
+        display: block;
+    }
+    .notifications-header {
+        font-weight: 600;
+        padding: 0.5em 1em;
+        border-bottom: 1px solid #eee;
+        background: var(--red, #db4c44);
+        color: #fff;
+        border-radius: 10px 10px 0 0;
+    }
+    .notifications-list {
+        list-style: none;
+        margin: 0;
+        padding: 0.5em 1em;
+        background-color: var(--black);
+        color: var(--white);
+    }
+    .notifications-list li {
+        padding: 0.5em 0;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 0.98em;
+    }
+    .notifications-list li:last-child {
+        border-bottom: none;
+    }
+    @media (max-width: 768px) {
+        #notifications-panel {
+            right: auto;
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 180px;
+        }
+        #notifications-count {
+            min-width: 16px;
+            height: 16px;
+            font-size: 0.7em;
         }
     }
 

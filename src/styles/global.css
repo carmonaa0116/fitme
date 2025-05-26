@@ -248,7 +248,7 @@ button {
 }
 
 dialog {
-    background-color: var(--red);
+    background-color: var(--black);
     color: var(--white);
     border: 1px solid var(--secundary-red);
     border-radius: 15px;

@@ -6,15 +6,123 @@ const users = ["Juan", "María", "Pedro", "Ana", "Luis"]; // Lista de usuarios
 
 <Layout>
     <main>
-        <h1>Buscar Usuarios</h1>
-        <input id="searchInput" type="text" placeholder="Escribe el nombre de usuario..." />
-        <div id="user-list">
-           
-        </div>
+        <section id="amigos">
+            <h2>Mis Amigos</h2>
+            <ul class="user-list">
+            <li>
+            <a href="/VerUsuario?id=1" style="text-decoration: none; color: inherit;">
+            <div class="user-info">
+                <img
+                src="https://randomuser.me/api/portraits/men/32.jpg"
+                alt="Juan Pérez"
+                class="user-avatar"
+                style="width:48px;height:48px;border-radius:50%;margin-right:10px;"
+                onerror="this.onerror=null;this.src='/src/assets/user-icon.png';"
+                />
+                <div>
+                <p><strong>juanperez</strong></p>
+                <p>Juan Pérez</p>
+                <p>Rol: Usuario</p>
+                </div>
+            </div>
+            </a>
+            </li>
+            <li>
+            <a href="/VerUsuario?id=2" style="text-decoration: none; color: inherit;">
+            <div class="user-info">
+                <img
+                src="https://randomuser.me/api/portraits/women/44.jpg"
+                alt="María García"
+                class="user-avatar"
+                style="width:48px;height:48px;border-radius:50%;margin-right:10px;"
+                onerror="this.onerror=null;this.src='/src/assets/user-icon.png';"
+                />
+                <div>
+                <p><strong>mariag</strong></p>
+                <p>María García</p>
+                <p>Rol: Entrenador</p>
+                </div>
+            </div>
+            </a>
+            </li>
+            <li>
+            <a href="/VerUsuario?id=3" style="text-decoration: none; color: inherit;">
+            <div class="user-info">
+                <img
+                src="https://randomuser.me/api/portraits/men/65.jpg"
+                alt="Pedro López"
+                class="user-avatar"
+                style="width:48px;height:48px;border-radius:50%;margin-right:10px;"
+                onerror="this.onerror=null;this.src='/src/assets/user-icon.png';"
+                />
+                <div>
+                <p><strong>pedrolopez</strong></p>
+                <p>Pedro López</p>
+                <p>Rol: Usuario</p>
+                </div>
+            </div>
+            </a>
+            </li>
+            </ul>
+        </section>
+        <h2>Buscar Usuarios</h2>
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Escribe el nombre de usuario..."
+        />
+        <div id="user-list"></div>
     </main>
     <script type="module" src="/src/js/usuarios.js"></script>
 </Layout>
 <style>
+    .user-list {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1vw;
+    }
 
+    .user-list li {
+        border: 2px solid var(--black);
+        border-radius: 10px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #181212;
+        transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+        cursor: pointer;
+    }
+
+    .user-list li:hover {
+        background: #2d0909;
+        border-color: #b71c1c;
+        box-shadow: 0 2px 12px 0 rgba(183,28,28,0.15);
+    }
+
+    .user-list li:hover .user-info {
+        color: #ff5252;
+    }
+
+    .user-list li:hover .user-avatar {
+        border: 2px solid #b71c1c;
+    }
+
+    .user-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        margin-right: 10px;
+        border: 2px solid transparent;
+        transition: border 0.2s;
+    }
+
+    #amigos {
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
 </style>
-

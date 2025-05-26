@@ -431,6 +431,76 @@ export async function actualizarUsuario(nombre_usuario, nombre, email, fecha_nac
     }
 }
 
+export async function cambiarEstadoSolicitud(id_solicitud, estado) {
+    try {
+        const response = await fetch('http://localhost/php-fitme/cambiarEstadoSolicitud.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id_solicitud, estado })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error al cambiar el estado de la solicitud:", error);
+    }
+}
+
+export async function cargarNotificaciones(id_destinatario) {
+    try {
+        const response = await fetch('http://localhost/php-fitme/getNotificaciones.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id_destinatario: id_destinatario })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error al cargar notificaciones:", error);
+        return null;
+    }
+}
+    
+
+export async function enviar_solicitud(id_usuario, id_usuario_solicitud) {
+    try {
+        const response = await fetch('http://localhost/php-fitme/enviarSolicitud.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id_remitente: id_usuario, id_destinatario: id_usuario_solicitud })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (data.error) {
+            console.error(data.error);
+            return null;
+        }   
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error("Error al enviar la solicitud:", error);
+    }
+    
+}
 
 export async function login(nombre_usuario, contrasena) {
     // Validación de los campos
@@ -462,7 +532,7 @@ export async function login(nombre_usuario, contrasena) {
         }
     } catch (error) {
         console.error('Error en la solicitud de login:', error);
-        throw new Error("Hubo un problema al intentar iniciar sesión. Inténtalo de nuevo más tarde.");
+        throw new Error(error.message || "Error en la solicitud de login");
     }
 }
 

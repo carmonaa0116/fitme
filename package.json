@@ -10,7 +10,7 @@
     "api": "node src/server/server.js"
   },
   "devDependencies": {
-    "astro": "^5.7.4"
+    "astro": "^5.7.10"
   },
   "dependencies": {
     "cors": "^2.8.5",

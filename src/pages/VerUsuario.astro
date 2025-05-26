@@ -4,10 +4,12 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
     <main>
-        <dialog id="editProfileDialog"></dialog>
+        <dialog id="solicitudAmistadDialog">
+            <p>¡Solicitud de amistad enviada!</p>
+            <button id="cerrarSolicitudAmistadDialog" onclick="document.getElementById('solicitudAmistadDialog').close()">Cerrar</button>
+        </dialog>
 
         <section id="profile">
-
             <div class="profile-content">
                 <h2>Foto de perfil</h2>
                 <div class="perfil_img">
@@ -52,22 +54,27 @@ import Layout from "../layouts/Layout.astro";
                         <strong>Peso:</strong>
                         <span id="perfil_peso">null</span> kg
                     </p>
-                    <button id="friend-request-button">Enviar solicitud de amistad</button>
+                    <button id="friend-request-button"
+                        >Enviar solicitud de amistad</button
+                    >
                 </div>
             </div>
-            
         </section>
-        <section>
-            <h1>Rutinas</h1>
+        <section id="routines">
+            <h1>Rutinas de <span id="username">null</span>:</h1>
             <div id="routines-container"></div>
         </section>
-        
     </main>
 </Layout>
 
 <style>
     @import url(../assets/font/font.css);
     @import url(../styles/global.css);
+
+    #routines {
+        margin: 2rem;
+        text-align: center;
+    }
 
     #profile {
         display: flex;
@@ -123,8 +130,6 @@ import Layout from "../layouts/Layout.astro";
         font-size: 1rem;
         margin: 10px 0;
     }
-
-
 
     @media (min-width: 769px) {
         .profile-content {
