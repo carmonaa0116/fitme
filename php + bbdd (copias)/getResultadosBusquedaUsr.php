@@ -22,7 +22,7 @@ if (!isset($data['nombreUsr'])) {
 $nombreUsr = '%' . $data['nombreUsr'] . '%'; // Agregar comodines para buscar coincidencias parciales
 
 // Preparar y ejecutar la consulta SQL
-$stmt = $conexion->prepare("SELECT id, nombre_usuario, nombre, experiencia, foto_perfil FROM usuarios WHERE nombre_usuario LIKE ?");
+$stmt = $conexion->prepare("SELECT * FROM usuarios WHERE nombre_usuario LIKE ?");
 $stmt->bind_param("s", $nombreUsr);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -34,13 +34,15 @@ if (!$result) {
 
 $usuarios = array();
 while ($row = $result->fetch_assoc()) {
-    $usuarios[] = [
-        'id' => $row['id'],
-        'nombre_usuario' => $row['nombre_usuario'],
-        'nombre' => $row['nombre'],
-        'experiencia' => $row['experiencia'],
-        'foto_perfil' => base64_encode($row['foto_perfil']) // Codificar en base64
-    ];
+    $usuario = [];
+    foreach ($row as $key => $value) {
+        if ($key === 'foto_perfil') {
+            $usuario[$key] = base64_encode($value); // Codificar en base64
+        } else {
+            $usuario[$key] = $value;
+        }
+    }
+    $usuarios[] = $usuario;
 }
 
 echo json_encode([
