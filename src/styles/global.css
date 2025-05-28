@@ -3,7 +3,7 @@
 :root {
     --black: #090707;
     --red: #DB4C44;
-    --secundary-red: #FF5A5F;
+    --secundary-red: #b71c1c;
     --white: #FFFFFF;
     --gray: #e5e5e50f;
 }
@@ -17,25 +17,55 @@
 
 
 .diaRutina {
-    border: 1px solid black;
-    width: 10vw;
-    padding: 1vw;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 1vw;
+    ;
     height: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e6e6e6;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-@media (max-width: 768px) { /* Tablets */
+.friend-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: var(--gray);
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.friend-item:hover {
+    background-color: var(--secundary-red);
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+
+    /* Tablets */
     .diaRutina {
         width: 20vw;
         padding: 2vw;
     }
 }
 
-@media (max-width: 480px) { /* Mobile phones */
+@media (max-width: 480px) {
+
+    /* Mobile phones */
     .diaRutina {
         width: 70vw;
         padding: 4vw;
     }
 }
+
 /* Para navegadores basados en WebKit (Chrome, Edge, Safari) */
 *::-webkit-scrollbar {
     width: 8px;
@@ -111,6 +141,7 @@ a {
 
 main {
     max-width: 100vw;
+
     max-height: 200vh;
     width: 90vw;
     display: flex;
@@ -243,6 +274,10 @@ select:focus {
 }
 
 button {
+    background-color: var(--secundary-red);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 8px;
     cursor: pointer;
     border: none;
 }
@@ -316,20 +351,44 @@ dialog::backdrop {
     max-width: 600px;
 }
 
+.mio {
+    align-self: flex-end;
+    background-color: var(--secundary-red);
+    color: var(--white);
+}
+
+.otro {
+    align-self: flex-start;
+    background-color: #222;
+    color: var(--white);
+}
+
+.mio, .otro {
+    padding: 10px 15px;
+    border-radius: 8px;
+    max-width: 80%;
+    word-break: break-word;
+    font-size: 1rem;
+    line-height: 1.4rem;
+}
+
+
 .user-item {
     display: flex;
     align-items: center;
     gap: 1rem;
     padding: 1rem;
+    margin-bottom: 1vh;
     border: 1px solid #eee;
     border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     background-color: var(--gray);
     transition: background-color 0.2s ease;
 }
 
 .user-item:hover {
     background-color: var(--secundary-red);
+    cursor: pointer;
 }
 
 .user-avatar {

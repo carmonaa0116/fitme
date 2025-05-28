@@ -4,8 +4,8 @@ const menuToggle = document.getElementById("menuToggle");
 const navigation = document.getElementById("navigation");
 const notificationsPanel = document.getElementById("notifications-panel");
 const notificationsBtn = document.getElementById("notifications-btn");
-notificationsBtn.addEventListener("click", () => {
 
+notificationsBtn.addEventListener("click", () => {
     notificationsPanel.classList.toggle("hidden");
 });
 
@@ -22,7 +22,6 @@ if (menuToggle && navigation) {
     });
 }
 
-
 document.addEventListener('DOMContentLoaded', async () => {
     const datosSesionJSON = sessionStorage.getItem('usuario');
     const datosSesion = JSON.parse(datosSesionJSON);
@@ -38,63 +37,66 @@ document.addEventListener('DOMContentLoaded', async () => {
         imgPerfilUsr.src = '/src/assets/user-icon.png';
     }
 
-    const notificaciones = await cargarNotificaciones(datosSesion.id);
-    console.log(notificaciones);
+    const notificaciones = await cargarNotificaciones(datosSesion.id) || [];
 
     const notificationsList = document.querySelector(".notifications-list");
-    console.log(notificaciones.length);
-    notificaciones.forEach((notificacion) => {
-        console.log(notificacion);
-        const li = document.createElement("li");
-        li.classList.add("notification-item");
-        // Crear el span principal
-        const span = document.createElement("span");
 
-        // Crear el strong y el enlace
-        const strong = document.createElement("strong");
-        const link = document.createElement("a");
-        link.href = `/VerUsuario?id=${notificacion.id_remitente}`;
-        link.textContent = "Juan Pérez"; // Puedes reemplazar por notificacion.nombre_remitente si tienes el nombre
+    if (Array.isArray(notificaciones)) {
+        notificaciones.forEach((notificacion) => {
+            console.log(notificacion);
+            const li = document.createElement("li");
+            li.classList.add("notification-item");
 
-        strong.appendChild(link);
-        span.appendChild(strong);
+            // Crear el span principal
+            const span = document.createElement("span");
 
-        // Texto después del nombre
-        span.appendChild(document.createTextNode(" te ha enviado una solicitud"));
+            // Crear el strong y el enlace
+            const strong = document.createElement("strong");
+            const link = document.createElement("a");
+            link.href = `/VerUsuario?id=${notificacion.id_remitente}`;
+            link.textContent = notificacion.remitente_usuario; // Puedes reemplazar por notificacion.nombre_remitente si lo tienes
 
-        // Crear el contenedor de acciones
-        const actionsDiv = document.createElement("div");
-        actionsDiv.className = "notification-actions";
+            strong.appendChild(link);
+            span.appendChild(strong);
 
-        // Botón aceptar
-        const acceptBtn = document.createElement("button");
-        acceptBtn.className = "accept-btn";
-        acceptBtn.setAttribute("aria-label", "Aceptar");
-        acceptBtn.textContent = "✔️";
-        acceptBtn.addEventListener("click", async () => {
-            await cambiarEstadoSolicitud(notificacion.solicitud_id, 'Aceptada');
-            li.remove(); // Eliminar la notificación de la lista
-            const friendRequestDialog = document.getElementById("friendRequestDialog");
-            const dialogMessage = document.getElementById("dialogMessage").textContent = `Has aceptado la solicitud de amistad de ${notificacion.nombre_remitente}`;
-            friendRequestDialog.showModal();
+            // Texto después del nombre
+            span.appendChild(document.createTextNode(" te ha enviado una solicitud"));
+
+            // Crear el contenedor de acciones
+            const actionsDiv = document.createElement("div");
+            actionsDiv.className = "notification-actions";
+
+            // Botón aceptar
+            const acceptBtn = document.createElement("button");
+            acceptBtn.className = "accept-btn";
+            acceptBtn.setAttribute("aria-label", "Aceptar");
+            acceptBtn.textContent = "✔️";
+            acceptBtn.addEventListener("click", async () => {
+                await cambiarEstadoSolicitud(notificacion.solicitud_id, 'Aceptada');
+                li.remove(); // Eliminar la notificación de la lista
+                const friendRequestDialog = document.getElementById("friendRequestDialog");
+                document.getElementById("dialogMessage").textContent = `Has aceptado la solicitud de amistad de ${notificacion.remitente_usuario}`;
+                friendRequestDialog.showModal();
+            });
+
+            // Botón denegar
+            const denyBtn = document.createElement("button");
+            denyBtn.className = "deny-btn";
+            denyBtn.setAttribute("aria-label", "Denegar");
+            denyBtn.textContent = "❌";
+
+            // Agregar botones al contenedor de acciones
+            actionsDiv.appendChild(acceptBtn);
+            actionsDiv.appendChild(denyBtn);
+
+            // Agregar elementos al li
+            li.appendChild(span);
+            li.appendChild(actionsDiv);
+
+            notificationsList.appendChild(li);
         });
 
-        // Botón denegar
-        const denyBtn = document.createElement("button");
-        denyBtn.className = "deny-btn";
-        denyBtn.setAttribute("aria-label", "Denegar");
-        denyBtn.textContent = "❌";
-
-        // Agregar botones al contenedor de acciones
-        actionsDiv.appendChild(acceptBtn);
-        actionsDiv.appendChild(denyBtn);
-
-        // Agregar elementos al li
-        li.appendChild(span);
-        li.appendChild(actionsDiv);
-
-        notificationsList.appendChild(li);
-    });
-    console
-    document.getElementById("notifications-count").textContent = notificaciones.length;
+        // Actualizar contador
+        document.getElementById("notifications-count").textContent = notificaciones.length;
+    }
 });

@@ -1,3 +1,12 @@
+function getDatosSesion() {
+    const usuarioJSON = sessionStorage.getItem("usuario");
+    if (usuarioJSON) {
+        return JSON.parse(usuarioJSON);
+    } else {
+        return null;
+    }
+}
+
 export async function insertarEjercicios(formData) {
     try {
         // Convertir los músculos seleccionados en una cadena JSON
@@ -431,6 +440,160 @@ export async function actualizarUsuario(nombre_usuario, nombre, email, fecha_nac
     }
 }
 
+export async function manejarNuevoChat(user2_id) {
+    const datosSesion = getDatosSesion();
+    if (datosSesion) {
+        const id_usuario = String(datosSesion.id);
+        const id_amigo = String(user2_id);
+        try {
+            const response = await fetch('http://localhost/php-fitme/manejarNuevoChat.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ user1_id: id_usuario, user2_id: id_amigo })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error("Error al manejar el nuevo chat:", error);
+            return null;
+        }
+    } else {
+        console.error("No hay datos de sesión disponibles.");
+        return null;
+    }
+
+}
+
+export async function obtenerAmigos() {
+    const datosSesion = getDatosSesion();
+    try {
+        const response = await fetch('http://localhost/php-fitme/getAmigos.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id_usuario: datosSesion.id })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data || [];
+    } catch (error) {
+        console.error("Error al obtener los amigos:", error);
+        return [];
+    }
+}
+
+export async function getChats() {
+    const datosSesion = getDatosSesion();
+    try {
+        const response = await fetch('http://localhost/php-fitme/getChats.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id_usuario: datosSesion.id })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data || [];
+    } catch (error) {
+        console.error("Error al obtener los chats:", error);
+        return [];
+    }
+}
+
+export async function obtenerMensajes(id_usuario, id_amigo) {
+    try {
+        const res = await fetch("http://localhost/php-fitme/obtener_mensajes.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id_usuario, id_amigo })
+        });
+        const datos = await res.json();
+        return Array.isArray(datos) ? datos : [];
+    } catch (error) {
+        console.error("Error al obtener mensajes:", error);
+        return [];
+    }
+}
+
+export async function enviarMensaje(emisor_id, receptor_id, contenido) {
+    try {
+        const res = await fetch("http://localhost/php-fitme/enviar_mensaje.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ emisor_id, receptor_id, contenido })
+        });
+
+        const data = await res.json();
+        return data.success === true;
+    } catch (error) {
+        console.error("Error al enviar el mensaje:", error);
+        return false;
+    }
+}
+
+  
+
+export async function obtenerAmigosSinChat() {
+    const datosSesion = getDatosSesion();
+    try {
+        const response = await fetch('http://localhost/php-fitme/getAmigosSinChat.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id_usuario: datosSesion.id })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data || [];
+    } catch (error) {
+        console.error("Error al obtener los amigos:", error);
+        return [];
+    }
+}
+
+export async function cargarMensajes(idUsuario, idAmigo, contenedor) {
+    try {
+        const res = await fetch('http://localhost/php-fitme/obtener_mensajes.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id_usuario: idUsuario, id_amigo: idAmigo })
+        });
+
+        if (!res.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${res.status}`);
+        }
+
+        const mensajes = await res.json();
+        return mensajes;
+    } catch (error) {
+        console.error("Error al cargar los mensajes:", error);
+    }
+}
+
 export async function cambiarEstadoSolicitud(id_solicitud, estado) {
     try {
         const response = await fetch('http://localhost/php-fitme/cambiarEstadoSolicitud.php', {
@@ -473,7 +636,7 @@ export async function cargarNotificaciones(id_destinatario) {
         return null;
     }
 }
-    
+
 
 export async function enviar_solicitud(id_usuario, id_usuario_solicitud) {
     try {
@@ -493,13 +656,13 @@ export async function enviar_solicitud(id_usuario, id_usuario_solicitud) {
         if (data.error) {
             console.error(data.error);
             return null;
-        }   
+        }
         console.log(data);
         return data;
     } catch (error) {
         console.error("Error al enviar la solicitud:", error);
     }
-    
+
 }
 
 export async function login(nombre_usuario, contrasena) {
@@ -582,7 +745,7 @@ export async function getRutina(id) {
     }
 }
 
-export async function getUnUsuario(idUsuario){
+export async function getUnUsuario(idUsuario) {
     try {
         const response = await fetch('http://localhost/php-fitme/getUnUsuario.php', {
             method: 'POST',

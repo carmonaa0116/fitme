@@ -29,6 +29,7 @@
             <li><a href="/Home">Inicio</a></li>
             <li><a href="/Rutinas">Mis rutinas</a></li>
             <li><a href="/Usuarios">Usuarios</a></li>
+            <li><a href="/Mensajes">Mensajes</a></li>
         </ul>
     </ul>
     <ul id="user-navBar">
@@ -64,7 +65,7 @@
         </div>
         <dialog id="friendRequestDialog">
             <p id="dialogMessage">Solicitud procesada</p>
-            <button id="closeDialogBtn">Cerrar</button>
+            <button id="closeDialogBtn" onclick="document.getElementById('friendRequestDialog').close()">Cerrar</button>
         </dialog>
     </div>
 </nav>
@@ -141,7 +142,13 @@
         height: 2vh;
         border-radius: 10px;
         margin-left: 5vw;
-        background-color: var(--red);
+        transition: 0.3s;
+        
+    }
+
+    #user-navBar:hover {
+        background-color: var(--secundary-red);
+        transition: 0.3s;
     }
 
     #user-navBar > a {

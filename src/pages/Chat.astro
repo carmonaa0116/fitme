@@ -1,0 +1,128 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const mensajes = [
+  { autor: "yo", texto: "Hola, ¿cómo estás?", hora: "10:00 AM" },
+  { autor: "amigo", texto: "¡Muy bien! ¿Y tú?", hora: "10:01 AM" },
+  { autor: "yo", texto: "Trabajando en el proyecto FITME.", hora: "10:02 AM" },
+  { autor: "amigo", texto: "¡Qué bien! Suena interesante.", hora: "10:03 AM" },
+];
+---
+
+<Layout title="Chat">
+  <main class="chat-container">
+    <section class="chat-box">
+      <div class="mensajes">
+        
+      </div>
+      <form class="chat-input">
+        <input type="text" placeholder="Escribe un mensaje..." />
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .mio {
+    align-self: flex-end;
+    background-color: var(--secundary-red);
+    color: var(--white);
+  }
+
+  .otro {
+    align-self: flex-start;
+    background-color: #222;
+    color: var(--white);
+  }
+
+  .chat-container {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .chat-box {
+    width: 100%;
+    background-color: var(--gray);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .chat-box h2 {
+    margin-top: 0;
+    color: var(--white);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .mensajes {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 400px;
+    overflow-y: scroll;
+    margin-bottom: 2rem;
+  }
+
+  .mensaje {
+    padding: 0.75rem 1rem;
+    border-radius: 15px;
+    max-width: 70%;
+    font-size: 1rem;
+    word-wrap: break-word;
+    position: relative;
+  }
+
+  .mensaje.mio {
+    align-self: flex-end;
+    background-color: var(--secundary-red);
+    color: var(--white);
+  }
+
+  .mensaje.otro {
+    align-self: flex-start;
+    background-color: #222;
+    color: var(--white);
+  }
+
+  .hora {
+    font-size: 0.75rem;
+    color: var(--gray-light);
+    position: absolute;
+    bottom: -1.5rem;
+    right: 0;
+  }
+
+  .chat-input {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .chat-input input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--secundary-red);
+    background-color: transparent;
+    color: var(--white);
+  }
+
+  .chat-input button {
+    background-color: var(--red);
+    color: var(--white);
+    padding: 0.75rem 1.25rem;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+  }
+
+  .chat-input button:hover {
+    background-color: var(--secundary-red);
+  }
+</style>
+<script type="module" src="/src/js/chat.js"></script>

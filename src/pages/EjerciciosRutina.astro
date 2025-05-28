@@ -22,27 +22,12 @@ import Layout from "../layouts/Layout.astro";
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
-        margin: 20px auto;
-        max-width: 1200px;
-        padding: 20px;
         border-radius: 12px;
         background-color: var(--gray);
+        width: 100%;
     }
 
-    #diasRutina > div {
-        background-color: var(--white);
-        padding: 20px;
-        border-radius: 12px;
-        height: 100%;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        border: 1px solid #e6e6e6;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        transition:
-            transform 0.2s ease,
-            box-shadow 0.2s ease;
-    }
+
 
     #diasRutina > div:hover {
         transform: translateY(-5px);

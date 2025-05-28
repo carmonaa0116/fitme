@@ -1,0 +1,84 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <main>
+    <button id="new-chat-button">Empezar nuevo chat</button>
+
+    <section>
+      <h1 style="margin-bottom: 2rem;">Tus chats</h1>
+      <div id="user-list">
+        
+      </div>
+    </section>
+  </main>
+
+  <dialog id="friend-list-dialog">
+    <form method="dialog">
+      <h2>Selecciona un amigo para iniciar un chat</h2>
+      <ul id="friend-list">
+        <!-- Usuario 1 -->
+        
+      </ul>
+      <p>Selecciona un amigo de la lista para iniciar un chat privado.</p>
+      <button type="submit">Cerrar</button>
+    </form>
+  </dialog>
+</Layout>
+
+<style>
+  #new-chat-button {
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  #friend-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+
+  .friend-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1rem;
+  }
+
+  .user-avatar {
+    border-radius: 50%;
+  }
+
+  .user-info {
+    flex: 1;
+  }
+
+  .description {
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  dialog {
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 100%;
+  }
+
+  button[type="submit"] {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+
+
+</style>
+
+<script type="module" src="/src/js/mensajes.js" is:inline></script>
