@@ -1,20 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-const mensajes = [
-  { autor: "yo", texto: "Hola, ¿cómo estás?", hora: "10:00 AM" },
-  { autor: "amigo", texto: "¡Muy bien! ¿Y tú?", hora: "10:01 AM" },
-  { autor: "yo", texto: "Trabajando en el proyecto FITME.", hora: "10:02 AM" },
-  { autor: "amigo", texto: "¡Qué bien! Suena interesante.", hora: "10:03 AM" },
-];
 ---
 
 <Layout title="Chat">
   <main class="chat-container">
     <section class="chat-box">
-      <div class="mensajes">
-        
-      </div>
+      <div class="mensajes"></div>
       <form class="chat-input">
         <input type="text" placeholder="Escribe un mensaje..." />
         <button type="submit">Enviar</button>
@@ -24,6 +15,27 @@ const mensajes = [
 </Layout>
 
 <style>
+  body {
+    background-image: url("../assets/fondo.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    /*background-attachment: fixed;*/
+    background-color: var(--black);
+    color: var(--white);
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    animation: moverFondo 30s linear infinite alternate;
+  }
+
+  @keyframes moverFondo {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 100% 0%;
+    }
+  }
   .mio {
     align-self: flex-end;
     background-color: var(--secundary-red);

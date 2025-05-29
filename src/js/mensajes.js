@@ -12,12 +12,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 function configurarNuevosChats(chats) {
     const userList = document.getElementById("user-list");
     userList.innerHTML = '';
+    if (chats.length === 0) {
+        const noChatsMessage = document.createElement('p');
+        noChatsMessage.textContent = 'No tienes chats todavía.';
+        userList.appendChild(noChatsMessage);
+        return;
+    }
     chats.forEach((chat) => {
         console.log(chat)
         console.log(chat.usuario.nombre_usuario)
         const userItem = document.createElement('div');
         userItem.classList.add('user-item');
-        let fotoPerfil = chat.foto_perfil
+        let fotoPerfil = chat.usuario.foto_perfil
             ? `data:image/png;base64,${chat.usuario.foto_perfil}`
             : '/src/assets/user-icon.png';
         userItem.innerHTML = `
@@ -32,7 +38,6 @@ function configurarNuevosChats(chats) {
             window.location = '/Chat?id=' + chat.usuario.id;
         });
         userList.appendChild(userItem);
-    
     });
 }
 
@@ -57,38 +62,69 @@ function mostrarDialogoAmigos(dialogo, amigos) {
     titulo.textContent = 'Selecciona un amigo para chatear';
     dialogo.appendChild(titulo);
 
-    amigos.forEach(amigo => {
-        let fotoPerfil = amigo.foto_perfil
-            ? `data:image/png;base64,${amigo.foto_perfil}`
-            : '/src/assets/user-icon.png';
+    // Botón de cerrar en la esquina superior derecha
+    const closeDialogButton = document.createElement('button');
+    closeDialogButton.id = "close-dialog-button";
+    closeDialogButton.textContent = "×";
+    closeDialogButton.style.position = "absolute";
+    closeDialogButton.style.top = "10px";
+    closeDialogButton.style.right = "10px";
+    closeDialogButton.style.fontSize = "1.5rem";
+    closeDialogButton.style.background = "transparent";
+    closeDialogButton.style.border = "none";
+    closeDialogButton.style.cursor = "pointer";
+    closeDialogButton.setAttribute("aria-label", "Cerrar");
+    closeDialogButton.addEventListener("click", () => {
+        dialogo.close();
+    });
+    dialogo.appendChild(closeDialogButton);
 
-        const userItem = document.createElement('div');
-        userItem.classList.add('user-item');
-        userItem.innerHTML = `
+    if (amigos.length === 0) {
+        const noFriendsMessage = document.createElement('p');
+        noFriendsMessage.textContent = 'No tienes amigos para chatear.';
+        dialogo.appendChild(noFriendsMessage);
+
+        const buscarAmigosBtn = document.createElement('button');
+        buscarAmigosBtn.style.marginRight = "1dvw"
+        buscarAmigosBtn.textContent = 'Buscar amigos';
+        buscarAmigosBtn.addEventListener('click', () => {
+            window.location = '/Usuarios';
+        });
+        dialogo.appendChild(buscarAmigosBtn);
+    } else {
+        amigos.forEach(amigo => {
+            let fotoPerfil = amigo.foto_perfil
+                ? `data:image/png;base64,${amigo.foto_perfil}`
+                : '/src/assets/user-icon.png';
+
+            const userItem = document.createElement('div');
+            userItem.classList.add('user-item');
+            userItem.innerHTML = `
             <img class="user-avatar" src="${fotoPerfil}" alt="Avatar de ${amigo.nombre_usuario}" />
             <div class="user-info">
                 <p>${amigo.nombre_usuario}</p>
             </div>
         `;
 
-        userItem.addEventListener('click', () => {
-            console.log(`Iniciando chat con ${amigo.nombre_usuario}`);
-            manejarNuevoChat(amigo.id);
-            dialogo.close();
-            window.location = '/Chat?id=' + amigo.id;
+            userItem.addEventListener('click', () => {
+                console.log(`Iniciando chat con ${amigo.nombre_usuario}`);
+                manejarNuevoChat(amigo.id);
+                dialogo.close();
+                window.location = '/Chat?id=' + amigo.id;
+            });
+
+            dialogo.appendChild(userItem);
         });
+    }
 
-        dialogo.appendChild(userItem);
-    });
+    // Botón "Cerrar" abajo a la derecha
+    const cerrarAbajoBtn = document.createElement('button');
+    cerrarAbajoBtn.textContent = 'Cerrar';
 
-    const closeDialogButton = document.createElement('button');
-    closeDialogButton.id = "close-dialog-button";
-    closeDialogButton.textContent = "Cerrar";
-    closeDialogButton.addEventListener("click", () => {
+    cerrarAbajoBtn.addEventListener('click', () => {
         dialogo.close();
     });
+    dialogo.appendChild(cerrarAbajoBtn);
 
-    dialogo.appendChild(closeDialogButton);
     dialogo.showModal();
 }
-

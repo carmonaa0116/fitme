@@ -1,15 +1,31 @@
 <div class="bienvenida"></div>
 <section id="hero">
     <div id="hero-content">
-        <h1 style="text-align: center; line-height: 1;">🎯 ¡Empieza tu transformación con FitMe!</h1>
+        <h1 style="text-align: center; line-height: 1;">
+            🎯 ¡Empieza tu transformación con FitMe!
+        </h1>
         <p>Tu camino hacia el mejor estado físico a un solo click 🖱️</p>
         <button id="button-generator">
             <span>Ir al creador</span>
-            <svg id="logo" width="20" height="auto" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M24.5 13.25C24.5 19.4632 19.4632 24.5 13.25 24.5H2V13.25C2 7.03679 7.03679 2 13.25 2C19.4632 2 24.5 7.03679 24.5 13.25Z" fill="#DB4C44"></path>
-                <path d="M24.5 35.75C24.5 29.5368 29.5368 24.5 35.75 24.5H47V35.75C47 41.9632 41.9632 47 35.75 47C29.5368 47 24.5 41.9632 24.5 35.75Z" fill="#DB4C44"></path>
-                <path d="M2 35.75C2 41.9632 7.03679 47 13.25 47H24.5V35.75C24.5 29.5368 19.4632 24.5 13.25 24.5C7.03679 24.5 2 29.5368 2 35.75Z" fill="#DB4C44"></path>
-                <path d="M47 13.25C47 7.03679 41.9632 2 35.75 2H24.5V13.25C24.5 19.4632 29.5368 24.5 35.75 24.5C41.9632 24.5 47 19.4632 47 13.25Z" fill="#DB4C44"></path>
+             <svg
+                width="20"
+                height="auto"
+                viewBox="0 0 49 49"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M24.5 13.25C24.5 19.4632 19.4632 24.5 13.25 24.5H2V13.25C2 7.03679 7.03679 2 13.25 2C19.4632 2 24.5 7.03679 24.5 13.25Z"
+                    fill="#FFFFFF"></path>
+                <path
+                    d="M24.5 35.75C24.5 29.5368 29.5368 24.5 35.75 24.5H47V35.75C47 41.9632 41.9632 47 35.75 47C29.5368 47 24.5 41.9632 24.5 35.75Z"
+                    fill="#FFFFFF"></path>
+                <path
+                    d="M2 35.75C2 41.9632 7.03679 47 13.25 47H24.5V35.75C24.5 29.5368 19.4632 24.5 13.25 24.5C7.03679 24.5 2 29.5368 2 35.75Z"
+                    fill="#FFFFFF"></path>
+                <path
+                    d="M47 13.25C47 7.03679 41.9632 2 35.75 2H24.5V13.25C24.5 19.4632 29.5368 24.5 35.75 24.5C41.9632 24.5 47 19.4632 47 13.25Z"
+                    fill="#FFFFFF"></path>
             </svg>
         </button>
     </div>
@@ -23,10 +39,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 650px;
         width: 100%;
-        background-color: var(--gray);
-        background-image: url("../assets/hero.jpg");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -40,24 +53,29 @@
         text-align: center;
         padding: 3rem;
         border-radius: 20px;
-        background: rgba(255, 255, 255, 0.295);
-        backdrop-filter: blur(8px);
+        background: rgba(
+            255,
+            255,
+            255,
+            0.1
+        ); /* Más transparente para efecto vidrio */
+        backdrop-filter: blur(12px) saturate(180%);
+        -webkit-backdrop-filter: blur(12px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.2); /* Borde tenue como cristal */
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         color: var(--white);
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
-        transition: transform 0.3s;
+        transition: transform 0.3s ease;
     }
 
     #hero-content h1 {
         font-family: "Poppins", sans-serif;
         font-size: 2.5rem;
         font-weight: 700;
-        margin-bottom: 0.5rem;
     }
 
     #hero-content p {
         font-family: "Poppins", sans-serif;
         font-size: 1.2rem;
-        margin-bottom: 1.5rem;
     }
 
     #button-generator {
@@ -71,7 +89,9 @@
         font-family: "Poppins", sans-serif;
         font-size: 1rem;
         cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.3s ease;
+        transition:
+            background-color 0.3s ease,
+            transform 0.3s ease;
     }
 
     #button-generator:hover {
@@ -127,7 +147,7 @@
 </style>
 
 <script>
-    const divBienvenida = document.querySelector('.bienvenida');
+    const divBienvenida = document.querySelector(".bienvenida");
     const buttonGoToGenerator = document.getElementById("button-generator");
 
     if (buttonGoToGenerator) {
@@ -136,11 +156,11 @@
         });
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const datosUsr = sessionStorage.getItem('usuario');
+    document.addEventListener("DOMContentLoaded", () => {
+        const datosUsr = sessionStorage.getItem("usuario");
         if (divBienvenida && datosUsr) {
             const parsedUsr = JSON.parse(datosUsr);
-            const firstName = parsedUsr.nombre?.split(' ')[0] || 'Usuario';
+            const firstName = parsedUsr.nombre?.split(" ")[0] || "Usuario";
             divBienvenida.innerHTML = `<h1 style="text-align: center; line-height: 1;">¡Bienvenido/a ${firstName} 💪!</h1>`;
         } else {
             if (divBienvenida) {

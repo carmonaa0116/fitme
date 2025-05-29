@@ -1,6 +1,6 @@
 <nav id="navBar">
     <div id="logoNavBar">
-        <a href="/">
+        <a href="/Home">
             <svg
                 width="49"
                 height="49"
@@ -10,23 +10,28 @@
             >
                 <path
                     d="M24.5 13.25C24.5 19.4632 19.4632 24.5 13.25 24.5H2V13.25C2 7.03679 7.03679 2 13.25 2C19.4632 2 24.5 7.03679 24.5 13.25Z"
-                    fill="#DB4C44"></path>
+                    fill="#FFFFFF"></path>
                 <path
                     d="M24.5 35.75C24.5 29.5368 29.5368 24.5 35.75 24.5H47V35.75C47 41.9632 41.9632 47 35.75 47C29.5368 47 24.5 41.9632 24.5 35.75Z"
-                    fill="#DB4C44"></path>
+                    fill="#FFFFFF"></path>
                 <path
                     d="M2 35.75C2 41.9632 7.03679 47 13.25 47H24.5V35.75C24.5 29.5368 19.4632 24.5 13.25 24.5C7.03679 24.5 2 29.5368 2 35.75Z"
-                    fill="#DB4C44"></path>
+                    fill="#FFFFFF"></path>
                 <path
                     d="M47 13.25C47 7.03679 41.9632 2 35.75 2H24.5V13.25C24.5 19.4632 29.5368 24.5 35.75 24.5C41.9632 24.5 47 19.4632 47 13.25Z"
-                    fill="#DB4C44"></path>
+                    fill="#FFFFFF"></path>
             </svg>
         </a>
     </div>
-    <button id="menuToggle" aria-label="Toggle Navigation"> ☰ </button>
+    <button
+        id="menuToggle"
+        aria-label="Toggle Navigation"
+        style="color: var(--black);"
+    >
+        ☰
+    </button>
     <ul id="navigation">
         <ul id="navigation-buttons">
-            <li><a href="/Home">Inicio</a></li>
             <li><a href="/Rutinas">Mis rutinas</a></li>
             <li><a href="/Usuarios">Usuarios</a></li>
             <li><a href="/Mensajes">Mensajes</a></li>
@@ -65,164 +70,115 @@
         </div>
         <dialog id="friendRequestDialog">
             <p id="dialogMessage">Solicitud procesada</p>
-            <button id="closeDialogBtn" onclick="document.getElementById('friendRequestDialog').close()">Cerrar</button>
+            <button
+                id="closeDialogBtn"
+                onclick="document.getElementById('friendRequestDialog').close()"
+                >Cerrar</button
+            >
         </dialog>
     </div>
-</nav>
-<style>
-    @import url(../styles/global.css);
-    @import url(../assets/font/font.css);
+    <div
+        style="display: flex; align-items: center; justify-content: center; margin-left: 2vw; position: relative; top: 1vw;"
+        aria-label="Cerrar sesión"
+    >
+        <button
+            id="logoutBtn"
+            onclick="window.location.href='/'"
+            style="background: none;"
+            aria-label="Cerrar sesión"
+            ><svg
+                aria-label="Cerrar sesión"
+                fill="#FFFFFF"
+                height="auto"
+                width="5dvw"
+                version="1.1"
+                id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 500 500"
+                enable-background="new 0 0 500 500"
+                xml:space="preserve"
+            >
+                <g>
+                    <path
+                        d="M250,224c-4.4,0-8,3.6-8,8v24c0,4.4-3.6,8-8,8h-40c-4.4,0-8-3.6-8-8V144c0-4.4,3.6-8,8-8h40c4.4,0,8,3.6,8,8v24
+		c0,4.4,3.6,8,8,8s8-3.6,8-8v-24c0-13.2-10.8-24-24-24h-40c-13.2,0-24,10.8-24,24v112c0,13.2,10.8,24,24,24h40c13.2,0,24-10.8,24-24
+		v-24C258,227.6,254.4,224,250,224z"
+                    ></path>
+                    <path
+                        d="M328.4,204.8c0.1-0.1,0.2-0.2,0.3-0.3c0,0,0,0,0-0.1c0.1-0.2,0.2-0.4,0.3-0.6c0.1-0.3,0.3-0.5,0.4-0.8
+		c0.1-0.3,0.2-0.5,0.3-0.8c0.1-0.2,0.2-0.4,0.2-0.7c0.2-1,0.2-2.1,0-3.1c0,0,0,0,0,0c0-0.2-0.1-0.4-0.2-0.7
+		c-0.1-0.3-0.1-0.5-0.2-0.8c0,0,0,0,0,0c-0.1-0.3-0.3-0.5-0.4-0.8c-0.1-0.2-0.2-0.4-0.3-0.6c-0.3-0.4-0.6-0.9-1-1.2l-32-32
+		c-3.1-3.1-8.2-3.1-11.3,0c-3.1,3.1-3.1,8.2,0,11.3l18.3,18.3H210c-4.4,0-8,3.6-8,8s3.6,8,8,8h92.7l-18.3,18.3
+		c-3.1,3.1-3.1,8.2,0,11.3c1.6,1.6,3.6,2.3,5.7,2.3s4.1-0.8,5.7-2.3l32-32c0,0,0,0,0,0C327.9,205.4,328.1,205.1,328.4,204.8z"
+                    ></path>
+                </g>
+            </svg>
+        </button>
+    </div>
+    <style>
+        @import url(../styles/global.css);
+        @import url(../assets/font/font.css);
 
-    #navBar {
-        font-family: "Poppins", sans-serif;
-        font-weight: 600;
-        display: flex;
-        height: 100px;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-        position: sticky;
-        margin: 2vw;
-        padding: 0 2vw;
-    }
+        #navBar {
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            display: flex;
+            height: 100px;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+            position: sticky;
+            margin: 2vw;
+            padding: 0 2vw;
 
-    #logoNavBar {
-        height: 50px;
-        width: auto;
-    }
+            /* Efecto cristal */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            color: var(--white);
+            transition: transform 0.3s ease;
+        }
 
-    #logoNavBar > a {
-        width: inherit;
-        height: inherit;
-    }
+        #logoNavBar {
+            height: 50px;
+            width: auto;
+        }
 
-    #navigation {
-        display: flex;
-        align-items: center;
-        height: 50px;
-    }
-
-    #navigation-buttons {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        gap: 3vw;
-        color: white;
-        text-decoration: none;
-        height: 100%;
-    }
-
-    #navigation-buttons > li > a {
-        color: var(--white);
-        text-decoration: none;
-        transition: 0.5s;
-    }
-
-    #navigation-buttons > li {
-        transition: 0.5s;
-    }
-
-    #navigation-buttons > li:hover {
-        color: var(--white);
-        text-decoration: none;
-        transform: scale(1.1);
-        transition: 0.5s;
-    }
-
-    #user-navBar {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        list-style: none;
-        margin-right: 2vw;
-        padding: 1vw;
-        height: 2vh;
-        border-radius: 10px;
-        margin-left: 5vw;
-        transition: 0.3s;
-        
-    }
-
-    #user-navBar:hover {
-        background-color: var(--secundary-red);
-        transition: 0.3s;
-    }
-
-    #user-navBar > a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        color: var(--white);
-        height: 100%;
-        transition: 0.5s;
-    }
-
-    #user-navBar > a:hover {
-        text-decoration: none;
-        color: var(--white);
-        opacity: 0.8;
-        transition: 0.5s;
-    }
-
-    #user-icon {
-        width: 3vw;
-        height: auto;
-        border-radius: 50%;
-        margin-right: 1vw;
-    }
-
-    /* Ocultar el botón en pantallas grandes */
-    #menuToggle {
-        color: var(--red);
-        background: none;
-        display: none;
-    }
-
-    /* Mostrar el botón solo en pantallas móviles (máximo 768px) */
-    @media (max-width: 768px) {
-        #menuToggle {
-            display: block;
+        #logoNavBar > a {
+            width: inherit;
+            height: inherit;
         }
 
         #navigation {
-            display: none; /* Ocultar la navegación por defecto */
-            width: 100%; /* Aseguramos que ocupe todo el ancho */
-            height: 100%;
-            position: absolute; /* Lo hacemos flotar sobre el contenido */
-            top: 0;
-            left: 0;
-            background-color: #333; /* Fondo oscuro para el menú */
-            padding: 20px 0; /* Espaciado alrededor */
-            z-index: 9999; /* Aseguramos que esté sobre otros elementos */
-        }
-
-        #navigation.open {
-            display: block; /* Mostrar la navegación cuando se active */
+            display: flex;
+            align-items: center;
+            height: 50px;
         }
 
         #navigation-buttons {
-            flex-direction: column;
-            justify-content: center; /* Centrado vertical de los elementos */
-            align-items: center; /* Centrado horizontal de los elementos */
-            gap: 1vw;
-            padding: 0; /* Quitamos los márgenes predeterminados */
-        }
-
-        #navigation-buttons > li {
-            width: 100%; /* Para que los elementos ocupen todo el ancho */
-            text-align: center; /* Aseguramos que los enlaces se centren */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 3vw;
+            color: white;
+            text-decoration: none;
+            height: 100%;
         }
 
         #navigation-buttons > li > a {
-            color: white;
+            color: var(--white);
             text-decoration: none;
-            padding: 10px; /* Espaciado alrededor de los enlaces */
-            display: block;
-            text-align: center; /* Centrado del texto dentro del enlace */
+            transition: 0.5s;
+        }
+
+        #navigation-buttons > li {
             transition: 0.5s;
         }
 
@@ -232,135 +188,236 @@
             transform: scale(1.1);
             transition: 0.5s;
         }
-    }
-
-    #notifications-container {
-        position: relative;
-        margin-left: 2vw;
-    }
-    #notifications-btn {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0.5vw;
-        border-radius: 50%;
-        transition: background 0.2s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-    }
-    #notifications-btn:hover {
-        background: rgba(219, 76, 68, 0.15);
-    }
-    #bell-icon {
-        display: block;
-    }
-    #notifications-count {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        transform: translate(40%, 40%);
-        background: var(--red);
-        color: #fff;
-        font-size: 0.8em;
-        font-weight: bold;
-        border-radius: 50%;
-        min-width: 20px;
-        height: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-        pointer-events: none;
-        z-index: 1;
-    }
-    #notifications-panel {
-        display: none;
-        position: absolute;
-        right: 0;
-        top: 120%;
-        min-width: 220px;
-        background: var(--black);
-        color: #222;
-        border-radius: 10px;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-        z-index: 10000;
-        padding: 0.5em 0;
-        font-weight: 400;
-    }
-    #notifications-panel:not(.hidden) {
-        display: block;
-    }
-    .notifications-header {
-        font-weight: 600;
-        padding: 0.5em 1em;
-        border-bottom: 1px solid #eee;
-        background: var(--red, #db4c44);
-        color: #fff;
-        border-radius: 10px 10px 0 0;
-    }
-    .notifications-list {
-        list-style: none;
-        margin: 0;
-        padding: 0.5em 1em;
-        background-color: var(--black);
-        color: var(--white);
-    }
-    .notifications-list li {
-        padding: 0.5em 0;
-        border-bottom: 1px solid #f0f0f0;
-        font-size: 0.98em;
-    }
-    .notifications-list li:last-child {
-        border-bottom: none;
-    }
-    @media (max-width: 768px) {
-        #notifications-panel {
-            right: auto;
-            left: 50%;
-            transform: translateX(-50%);
-            min-width: 180px;
-        }
-        #notifications-count {
-            min-width: 16px;
-            height: 16px;
-            font-size: 0.7em;
-        }
-    }
-
-    /* Responsive Styles */
-    @media (max-width: 768px) {
-        #navBar {
-            align-items: center;
-            flex-direction: column;
-            height: auto;
-            padding: 1vw;
-        }
 
         #user-navBar {
-            margin-left: 0;
-            margin-right: 0;
-        }
-
-        #user-icon {
-            width: 30px;
-            margin-right: 0.5vw;
-        }
-    }
-
-    @media (max-width: 480px) {
-        #navBar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            list-style: none;
+            margin-right: 2vw;
             padding: 1vw;
+            height: 2vh;
+            border-radius: 10px;
+            margin-left: 5vw;
+            transition: 0.3s;
         }
 
-        #navigation-buttons {
-            font-size: 14px;
+        #user-navBar:hover {
+            background-color: var(--secundary-red);
+            transition: 0.3s;
+        }
+
+        #user-navBar > a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--white);
+            height: 100%;
+            transition: 0.5s;
+        }
+
+        #user-navBar > a:hover {
+            text-decoration: none;
+            color: var(--white);
+            opacity: 0.8;
+            transition: 0.5s;
         }
 
         #user-icon {
-            width: 25px;
+            width: 3vw;
+            height: auto;
+            border-radius: 50%;
+            margin-right: 1vw;
         }
-    }
-</style>
-<script type="module" src="/src/js/navBar.js" is:inline></script>
+
+        /* Ocultar el botón en pantallas grandes */
+        #menuToggle {
+            color: var(--red);
+            background: none;
+            display: none;
+        }
+
+        /* Mostrar el botón solo en pantallas móviles (máximo 768px) */
+        @media (max-width: 768px) {
+            #menuToggle {
+                display: block;
+            }
+
+            #navigation {
+                display: none; /* Ocultar la navegación por defecto */
+                width: 100%; /* Aseguramos que ocupe todo el ancho */
+                height: 100%;
+                position: absolute; /* Lo hacemos flotar sobre el contenido */
+                top: 0;
+                left: 0;
+                background-color: #333; /* Fondo oscuro para el menú */
+                padding: 20px 0; /* Espaciado alrededor */
+                z-index: 9999; /* Aseguramos que esté sobre otros elementos */
+            }
+
+            #navigation.open {
+                display: block; /* Mostrar la navegación cuando se active */
+            }
+
+            #navigation-buttons {
+                flex-direction: column;
+                justify-content: center; /* Centrado vertical de los elementos */
+                align-items: center; /* Centrado horizontal de los elementos */
+                gap: 1vw;
+                padding: 0; /* Quitamos los márgenes predeterminados */
+            }
+
+            #navigation-buttons > li {
+                width: 100%; /* Para que los elementos ocupen todo el ancho */
+                text-align: center; /* Aseguramos que los enlaces se centren */
+            }
+
+            #navigation-buttons > li > a {
+                color: white;
+                text-decoration: none;
+                padding: 10px; /* Espaciado alrededor de los enlaces */
+                display: block;
+                text-align: center; /* Centrado del texto dentro del enlace */
+                transition: 0.5s;
+            }
+
+            #navigation-buttons > li:hover {
+                color: var(--white);
+                text-decoration: none;
+                transform: scale(1.1);
+                transition: 0.5s;
+            }
+        }
+
+        #notifications-container {
+            position: relative;
+            margin-left: 2vw;
+        }
+        #notifications-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5vw;
+            border-radius: 50%;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        #notifications-btn:hover {
+            background: rgba(219, 76, 68, 0.15);
+        }
+        #bell-icon {
+            display: block;
+        }
+        #notifications-count {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            transform: translate(40%, 40%);
+            background: var(--red);
+            color: #fff;
+            font-size: 0.8em;
+            font-weight: bold;
+            border-radius: 50%;
+            min-width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            pointer-events: none;
+            z-index: 1;
+        }
+        #notifications-panel {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 120%;
+            min-width: 220px;
+            background: var(--black);
+            color: #222;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            z-index: 10000;
+            padding: 0.5em 0;
+            font-weight: 400;
+        }
+        #notifications-panel:not(.hidden) {
+            display: block;
+        }
+        .notifications-header {
+            font-weight: 600;
+            padding: 0.5em 1em;
+            border-bottom: 1px solid #eee;
+            background: var(--red, #db4c44);
+            color: #fff;
+            border-radius: 10px 10px 0 0;
+        }
+        .notifications-list {
+            list-style: none;
+            margin: 0;
+            padding: 0.5em 1em;
+            background-color: var(--black);
+            color: var(--white);
+        }
+        .notifications-list li {
+            padding: 0.5em 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.98em;
+        }
+        .notifications-list li:last-child {
+            border-bottom: none;
+        }
+        @media (max-width: 768px) {
+            #notifications-panel {
+                right: auto;
+                left: 50%;
+                transform: translateX(-50%);
+                min-width: 180px;
+            }
+            #notifications-count {
+                min-width: 16px;
+                height: 16px;
+                font-size: 0.7em;
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            #navBar {
+                align-items: center;
+                flex-direction: column;
+                height: auto;
+                padding: 1vw;
+            }
+
+            #user-navBar {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            #user-icon {
+                width: 30px;
+                margin-right: 0.5vw;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #navBar {
+                padding: 1vw;
+            }
+
+            #navigation-buttons {
+                font-size: 14px;
+            }
+
+            #user-icon {
+                width: 25px;
+            }
+        }
+    </style>
+    <script type="module" src="/src/js/navBar.js" is:inline></script>
+</nav>

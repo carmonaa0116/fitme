@@ -14,23 +14,38 @@
         </div>
         <div class="carousel-step">
             <img src="/src/assets/Paso2y3.png" alt="Paso 2" />
-            <p><strong>Paso 2:</strong> Asigna un nombre y elige los días que vas a entrenar.</p>
+            <p>
+                <strong>Paso 2:</strong> Asigna un nombre y elige los días que vas
+                a entrenar.
+            </p>
         </div>
         <div class="carousel-step">
             <img src="/src/assets/Paso4.png" alt="Paso 3" />
-            <p><strong>Paso 3:</strong> Haz clic en "Crear Rutina" para guardar los cambios.</p>
+            <p>
+                <strong>Paso 3:</strong> Haz clic en "Crear Rutina" para guardar
+                los cambios.
+            </p>
         </div>
         <div class="carousel-step">
             <img src="/src/assets/Paso6.png" alt="Paso 4" />
-            <p><strong>Paso 4:</strong> Selecciona tu rutina y haz clic en "Agregar ejercicios".</p>
+            <p>
+                <strong>Paso 4:</strong> Selecciona tu rutina y haz clic en "Agregar
+                ejercicios".
+            </p>
         </div>
         <div class="carousel-step">
             <img src="/src/assets/Paso7.png" alt="Paso 5" />
-            <p><strong>Paso 5:</strong> Añade ejercicios con sus series, repeticiones y peso.</p>
+            <p>
+                <strong>Paso 5:</strong> Añade ejercicios con sus series, repeticiones
+                y peso.
+            </p>
         </div>
         <div class="carousel-step">
             <img src="/src/assets/Paso8.png" alt="Paso 6" />
-            <p><strong>Paso 6:</strong> ¡Listo! Tu rutina está organizada y disponible siempre.</p>
+            <p>
+                <strong>Paso 6:</strong> ¡Listo! Tu rutina está organizada y disponible
+                siempre.
+            </p>
             <a href="#" class="start-button">¡Quiero empezar ya!</a>
         </div>
     </div>
@@ -41,18 +56,17 @@
     </div>
 </div>
 
-
 <style>
     @import url("../styles/global.css");
     @import url("../assets/font/font.css");
     .start-button {
-        font-family: 'Poppins';
+        font-family: "Poppins";
         display: inline-block;
         margin-top: 1.5rem;
         padding: 0.75rem 1.5rem;
         background-color: var(--secundary-red);
         color: var(--white);
-        
+
         font-size: 1rem;
         text-align: center;
         text-decoration: none;
@@ -79,6 +93,8 @@
         overflow: hidden;
         padding: 1rem;
         box-sizing: border-box;
+
+       
     }
 
     .carousel-track {
@@ -101,6 +117,16 @@
         justify-content: center;
         text-align: center;
         scroll-snap-align: start;
+
+         /* Efecto cristal */
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px) saturate(180%);
+        -webkit-backdrop-filter: blur(12px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        border-radius: 20px;
+        color: var(--white);
+        transition: transform 0.3s ease;
     }
 
     .carousel-step img {
