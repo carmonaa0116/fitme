@@ -5,6 +5,14 @@ import "../styles/global.css";
 ---
 
 <NoSessionLayout>
+    <dialog id="dialog-mensaje" class="modal-dialog">
+        <form method="dialog" class="modal-content">
+            <p id="dialog-text"></p>
+            <menu>
+                <button id="cerrar-dialogo">Cerrar</button>
+            </menu>
+        </form>
+    </dialog>
     <main id="main-registro">
         <div id="div-registro">
             <form id="form-registro">
@@ -19,26 +27,6 @@ import "../styles/global.css";
                         required
                     />
                     <p id="mensajeNU"></p>
-                </div>
-
-                <div>
-                    <label for="contrasena">Contraseña:</label>
-                    <input
-                        type="password"
-                        id="contrasena"
-                        name="contrasena"
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label for="nombre">Nombre completo: (Opcional)</label>
-                    <input type="text" id="nombre" name="nombre" />
-                </div>
-
-                <div>
-                    <label for="email">Correo electrónico:</label>
-                    <input type="email" id="email" name="email" required />
                 </div>
 
                 <div>
@@ -95,11 +83,6 @@ import "../styles/global.css";
                     />
                 </div>
                 <button type="submit">Crear cuenta</button>
-                <div id="div-ya-tienes-cuenta">
-                    <p>
-                        ¿Ya tienes cuenta? <a href="/">Iniciar sesión</a>
-                    </p>
-                </div>
             </form>
         </div>
     </main>

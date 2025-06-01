@@ -27,8 +27,7 @@ $id_usuario = $conexion->real_escape_string($input['id_usuario']);
 // Consulta para obtener los datos del usuario
 $query = "SELECT 
     id, 
-    nombre_usuario, 
-    contrasena, 
+    nombre_usuario,  
     nombre, 
     sexo, 
     fecha_nacimiento, 

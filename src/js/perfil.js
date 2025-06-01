@@ -5,6 +5,7 @@ import { actualizarUsuario, getFotoPerfilBase64 } from "./api/apiEjercicios";
 document.addEventListener("DOMContentLoaded", async () => {
     const datosUsuarioString = sessionStorage.getItem('usuario');
     const datosUsuario = JSON.parse(datosUsuarioString);
+    console.log("Datos del usuario:", datosUsuario);
     await cargarContenido();
 });
 
@@ -191,6 +192,7 @@ function convertirArchivoABase64(file) {
 }
 
 function formatearFecha(fecha) {
+    if (!fecha || typeof fecha !== "string") return "";
     return fecha.split('-')
         .map((parte, index) => index === 0 ? parte : parte.padStart(2, '0'))
         .reverse()

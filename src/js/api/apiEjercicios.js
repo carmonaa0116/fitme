@@ -1,4 +1,4 @@
-function getDatosSesion() {
+export function getDatosSesion() {
     const usuarioJSON = sessionStorage.getItem("usuario");
     if (usuarioJSON) {
         return JSON.parse(usuarioJSON);
@@ -699,6 +699,63 @@ export async function login(nombre_usuario, contrasena) {
     }
 }
 
+export async function registrar(datos) {
+    console.log("Datos a registrar:", datos); // Verifica los datos que se envían
+    try {
+        const response = await fetch('http://localhost/php-fitme/registro.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                uid: datos.uid,
+                nombre_usuario: datos.nombre_usuario,
+                nombre: datos.nombre,
+                sexo: datos.sexo,
+                fecha_nacimiento: datos.fecha_nacimiento,
+                experiencia: datos.experiencia,
+                altura: datos.altura,
+                peso: datos.peso,
+                email: datos.email,
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+        return { error: 'No se pudo registrar el usuario. Inténtalo más tarde.' };
+    }
+}
+
+export async function comprobarUsuarioLogin(uid, email) {
+    try {
+        const response = await fetch('http://localhost/php-fitme/comprobarUsr.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ uid })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data); // Verifica la respuesta del servidor
+        // El PHP devuelve { found: true } o { found: false }
+        return data.found;
+    } catch (error) {
+        console.error("Error al comprobar el usuario:", error);
+        return false;
+    }
+}
+
 export async function deleteRutina(idRecibido) {
     try {
         const response = await fetch(`http://localhost/php-fitme/deleteRutina.php`, {
@@ -745,6 +802,29 @@ export async function getRutina(id) {
     }
 }
 
+export async function getDatosUsuarioUID(uid) {
+    try {
+        const response = await fetch('http://localhost/php-fitme/getDatosUsuarioUID.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ uid })
+        });
+
+        if (!response.ok) {
+            throw new Error("Error al obtener los datos del usuario");
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error:", error);
+        return null; // Devolver null en caso de error
+    }
+    
+}
+
 export async function getUnUsuario(idUsuario) {
     try {
         const response = await fetch('http://localhost/php-fitme/getUnUsuario.php', {
@@ -786,26 +866,5 @@ export async function getRutinasUser(idUsuario) {
     } catch (error) {
         console.error("Error:", error);
         return []; // Devolver un array vacío en caso de error
-    }
-}
-export async function registrar(datos) {
-    try {
-        const response = await fetch('http://localhost/php-fitme/registro.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(datos)
-        });
-
-        if (!response.ok) {
-            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
-        }
-
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error(error);
-        return { error: 'No se pudo registrar el usuario. Inténtalo más tarde.' };
     }
 }

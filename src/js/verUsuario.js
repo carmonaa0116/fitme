@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Obtiene los datos del usuario
     const usuario = await getUnUsuario(id);
+    console.log("Datos del usuario:", usuario);
 
 
     // Si los datos existen, se actualiza el contenido
@@ -95,7 +96,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         divRutina.addEventListener("click", () => {
             // Redirigir a la página de ejercicios de la rutina
-            window.location.href = `/EjerciciosRutina?id=${rutina.id}`;
+            window.location.href = `/VerRutinaUsr?id=${rutina.id}`;
         });
 
         container.appendChild(divRutina);

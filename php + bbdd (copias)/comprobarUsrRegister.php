@@ -27,7 +27,7 @@ try {
     $nombre_usuario = $datos['nombre_usuario'];
 
     // Consultar si el nombre de usuario ya existe
-    $stmt = $conn->prepare("SELECT id FROM usuarios WHERE nombre_usuario = ?");
+    $stmt = $conn->prepare("SELECT nombre_usuario FROM usuarios WHERE nombre_usuario = ?");
     $stmt->bind_param("s", $nombre_usuario);  // "s" indica que el parámetro es una cadena
 
     $stmt->execute();

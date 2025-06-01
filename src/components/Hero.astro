@@ -147,25 +147,5 @@
 </style>
 
 <script>
-    const divBienvenida = document.querySelector(".bienvenida");
-    const buttonGoToGenerator = document.getElementById("button-generator");
 
-    if (buttonGoToGenerator) {
-        buttonGoToGenerator.addEventListener("click", () => {
-            window.location.href = "/Rutinas";
-        });
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        const datosUsr = sessionStorage.getItem("usuario");
-        if (divBienvenida && datosUsr) {
-            const parsedUsr = JSON.parse(datosUsr);
-            const firstName = parsedUsr.nombre?.split(" ")[0] || "Usuario";
-            divBienvenida.innerHTML = `<h1 style="text-align: center; line-height: 1;">¡Bienvenido/a ${firstName} 💪!</h1>`;
-        } else {
-            if (divBienvenida) {
-                divBienvenida.innerHTML = `<h1 style="text-align: center; line-height: 1;">¡Bienvenido/a, Usuario!</h1>`;
-            }
-        }
-    });
 </script>

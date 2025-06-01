@@ -7,120 +7,154 @@ import NoSessionLayout from "../layouts/NoSessionLayout.astro";
         <p id="login-error-message">Ha ocurrido un error al iniciar sesión.</p>
         <button id="close-error-dialog">Cerrar</button>
     </dialog>
+
     <main id="main-login">
-        <div id="div-login">
-            <form id="form-login">
-                <h2>Iniciar sesión</h2>
-
-                <div class="form-group">
-                    <label for="nombre_usuario">Nombre de usuario:</label>
-                    <input
-                        type="text"
-                        id="nombre_usuario"
-                        name="nombre_usuario"
-                        required
-                    />
-                </div>
-
-                <div class="form-group">
-                    <label for="contrasena">Contraseña:</label>
-                    <input
-                        type="password"
-                        id="contrasena"
-                        name="contrasena"
-                        required
-                    />
-                </div>
-
-                <button type="submit">Iniciar sesión</button>
-            </form>
-            <div id="div-registrarse">
-                <p>
-                    ¿No tienes cuenta? <a href="/Registro">Registrarse</a>
-                </p>
-            </div>
-        </div>
+        <button id="btn-google">
+            <svg
+                viewBox="-3 0 262 262"
+                xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="xMidYMid"
+                class="login-svg"
+            >
+                <path
+                    d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"
+                    fill="#4285F4"></path>
+                <path
+                    d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"
+                    fill="#34A853"></path>
+                <path
+                    d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782"
+                    fill="#FBBC05"></path>
+                <path
+                    d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"
+                    fill="#EB4335"></path>
+            </svg>
+            Continuar con Google
+        </button>
+        <button id="btn-facebook">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                version="1.1"
+                id="svg9"
+                viewBox="0 0 666.66668 666.66717"
+                class="login-svg"
+            >
+                <defs id="defs13">
+                    <clipPath clipPathUnits="userSpaceOnUse" id="clipPath25">
+                        <path d="M 0,700 H 700 V 0 H 0 Z" id="path23"></path>
+                    </clipPath>
+                </defs>
+                <g
+                    id="g17"
+                    transform="matrix(1.3333333,0,0,-1.3333333,-133.33333,799.99999)"
+                >
+                    <g id="g19">
+                        <g id="g21" clip-path="url(#clipPath25)">
+                            <g id="g27" transform="translate(600,350)">
+                                <path
+                                    d="m 0,0 c 0,138.071 -111.929,250 -250,250 -138.071,0 -250,-111.929 -250,-250 0,-117.245 80.715,-215.622 189.606,-242.638 v 166.242 h -51.552 V 0 h 51.552 v 32.919 c 0,85.092 38.508,124.532 122.048,124.532 15.838,0 43.167,-3.105 54.347,-6.211 V 81.986 c -5.901,0.621 -16.149,0.932 -28.882,0.932 -40.993,0 -56.832,-15.528 -56.832,-55.9 V 0 h 81.659 l -14.028,-76.396 h -67.631 V -248.169 C -95.927,-233.218 0,-127.818 0,0"
+                                    style="fill:#0866ff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                                    id="path29"></path>
+                            </g>
+                            <g
+                                id="g31"
+                                transform="translate(447.9175,273.6036)"
+                            >
+                                <path
+                                    d="M 0,0 14.029,76.396 H -67.63 v 27.019 c 0,40.372 15.838,55.899 56.831,55.899 12.733,0 22.981,-0.31 28.882,-0.931 v 69.253 c -11.18,3.106 -38.509,6.212 -54.347,6.212 -83.539,0 -122.048,-39.441 -122.048,-124.533 V 76.396 h -51.552 V 0 h 51.552 v -166.242 c 19.343,-4.798 39.568,-7.362 60.394,-7.362 10.254,0 20.358,0.632 30.288,1.831 L -67.63,0 Z"
+                                    style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                                    id="path33"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+            Continuar con Facebook
+        </button>
     </main>
 
     <style>
         @import url("../assets/font/font.css");
-        @imnport url("../styles/global.css");
+        @import url("../styles/global.css");
 
         #main-login {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             padding: 1rem;
-        }
-
-        #form-login {
-            display: flex;
-            flex-direction: column;
-            color: var(--white);
-            border: 1px solid var(--red);
-            border-radius: 10px;
-            padding: 2rem;
-            width: 100vw;
-            max-width: 400px;
             gap: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .form-group {
+        #btn-google,
+        #btn-facebook {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 320px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 5px;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            transition:
+                box-shadow 0.2s,
+                transform 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            margin-bottom: 0.5rem;
             gap: 0.5rem;
         }
 
-        input {
-            padding: 0.5rem;
-            border: 1px solid var(--red);
-            border-radius: 5px;
-            background-color: var(--black);
-            color: var(--white);
+        .login-svg {
+            width: 1.5em;
+            height: 1.5em;
+            min-width: 24px;
+            min-height: 24px;
+            max-width: 32px;
+            max-height: 32px;
+            margin-right: 0.5em;
+            flex-shrink: 0;
+            display: inline-block;
         }
 
-        button {
-            padding: 0.75rem;
-            background-color: var(--red);
-            color: var(--white);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+        #btn-google {
+            background: #fff;
+            color: #222;
+            border: 1px solid #e0e0e0;
+        }
+        #btn-google:hover {
+            background: #f5f5f5;
+            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.15);
+            transform: translateY(-2px) scale(1.02);
         }
 
-        button:hover {
-            background-color: var(--secundary-red);
+        #btn-facebook {
+            background: #1877f3;
+            color: #fff;
+        }
+        #btn-facebook:hover {
+            background: #145db2;
+            box-shadow: 0 4px 12px rgba(24, 119, 243, 0.15);
+            transform: translateY(-2px) scale(1.02);
         }
 
-        #div-registrarse {
-            text-align: center;
-            margin-top: 1rem;
-            color: var(--white);
-        }
-
-        a {
-            text-decoration: none;
-            color: var(--red);
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: var(--secundary-red);
-        }
-
-        @media (min-width: 768px) {
-            #form-login {
-                max-width: 100vw;
+        @media (max-width: 480px) {
+            #main-login {
+                padding: 0.5rem;
             }
-        }
-
-        @media (min-width: 1024px) {
-            #form-login {
-                max-width: 600px;
+            #btn-google,
+            #btn-facebook {
+                max-width: 100%;
+                font-size: 0.95rem;
+                padding: 0.6rem 0.5rem;
+            }
+            .login-svg {
+                width: 1.2em;
+                height: 1.2em;
+                min-width: 20px;
+                min-height: 20px;
             }
         }
     </style>
