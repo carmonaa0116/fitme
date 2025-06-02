@@ -4,9 +4,23 @@ const menuToggle = document.getElementById("menuToggle");
 const navigation = document.getElementById("navigation");
 const notificationsPanel = document.getElementById("notifications-panel");
 const notificationsBtn = document.getElementById("notifications-btn");
+const logoutBtn = document.getElementById("logoutBtn");
+
+logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("usuario");
+    sessionStorage.removeItem("usuario");
+    window.location.href = "/";
+});
 
 notificationsBtn.addEventListener("click", () => {
     notificationsPanel.classList.toggle("hidden");
+});
+
+document.addEventListener("click", (event) => {
+    // Cierra el panel de notificaciones si se hace clic fuera de él
+    if (!notificationsPanel.contains(event.target) && !notificationsBtn.contains(event.target)) {
+        notificationsPanel.classList.add("hidden");
+    }
 });
 
 // Lógica para el menú lateral

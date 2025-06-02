@@ -1,33 +1,24 @@
-<div class="bienvenida"></div>
 <section id="hero">
     <div id="hero-content">
         <h1 style="text-align: center; line-height: 1;">
-            🎯 ¡Empieza tu transformación con FitMe!
+            👋 Bienvenido/a, <span id="nombre-usuario">Usuario</span>
         </h1>
-        <p>Tu camino hacia el mejor estado físico a un solo click 🖱️</p>
-        <button id="button-generator">
-            <span>Ir al creador</span>
-             <svg
-                width="20"
-                height="auto"
-                viewBox="0 0 49 49"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <path
-                    d="M24.5 13.25C24.5 19.4632 19.4632 24.5 13.25 24.5H2V13.25C2 7.03679 7.03679 2 13.25 2C19.4632 2 24.5 7.03679 24.5 13.25Z"
-                    fill="#FFFFFF"></path>
-                <path
-                    d="M24.5 35.75C24.5 29.5368 29.5368 24.5 35.75 24.5H47V35.75C47 41.9632 41.9632 47 35.75 47C29.5368 47 24.5 41.9632 24.5 35.75Z"
-                    fill="#FFFFFF"></path>
-                <path
-                    d="M2 35.75C2 41.9632 7.03679 47 13.25 47H24.5V35.75C24.5 29.5368 19.4632 24.5 13.25 24.5C7.03679 24.5 2 29.5368 2 35.75Z"
-                    fill="#FFFFFF"></path>
-                <path
-                    d="M47 13.25C47 7.03679 41.9632 2 35.75 2H24.5V13.25C24.5 19.4632 29.5368 24.5 35.75 24.5C41.9632 24.5 47 19.4632 47 13.25Z"
-                    fill="#FFFFFF"></path>
-            </svg>
-        </button>
+        <p id="fraseMotivacional">Tu camino hacia el mejor estado físico a un solo click 🖱️</p>
+
+        <div id="estadisticas-usuario">
+            <div class="stat-item">
+                <h2 id="num-entradas">0</h2>
+                <p>Veces que has entrado</p>
+            </div>
+            <div class="stat-item">
+                <h2 id="num-amigos">0</h2>
+                <p>Amigos</p>
+            </div>
+            <div class="stat-item">
+                <h2 id="num-rutinas">0</h2>
+                <p>Rutinas creadas</p>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -35,6 +26,24 @@
     @import "/src/assets/font/font.css";
     @import "../styles/global.css";
 
+    #estadisticas-usuario {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto auto;
+        gap: 2rem;
+        margin: 2rem 0;
+        justify-items: center;
+        align-items: center;
+    }
+
+    #estadisticas-usuario .stat-item:nth-child(3) {
+        grid-column: 1 / span 2;
+        grid-row: 2;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
     #hero {
         display: flex;
         justify-content: center;
@@ -65,6 +74,7 @@
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         color: var(--white);
         transition: transform 0.3s ease;
+        z-index: -999;
     }
 
     #hero-content h1 {
@@ -144,8 +154,37 @@
             padding: 0.5rem 1rem;
         }
     }
+    #estadisticas-usuario {
+        display: flex;
+        gap: 2rem;
+        margin: 2rem 0;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .stat-item {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 1rem;
+        padding: 1rem 2rem;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        min-width: 120px;
+    }
+
+    .stat-item h2 {
+        margin: 0;
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--white);
+    }
+
+    .stat-item p {
+        margin: 0.5rem 0 0;
+        font-size: 1rem;
+        color: var(--white);
+    }
 </style>
 
-<script>
-
-</script>
+<script type="module" src="/src/js/hero.js"></script>

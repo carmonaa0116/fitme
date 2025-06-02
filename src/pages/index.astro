@@ -9,6 +9,31 @@ import NoSessionLayout from "../layouts/NoSessionLayout.astro";
     </dialog>
 
     <main id="main-login">
+        <!-- Formulario de login clásico -->
+        <form id="login-form" method="POST" action="/api/login">
+            <input
+                type="text"
+                id="nombre_usuario"
+                name="nombre_usuario"
+                placeholder="Usuario"
+                required
+            />
+            <div style="position: relative;">
+                <input
+                    type="password"
+                    id="contrasena"
+                    name="contrasena"
+                    placeholder="Contraseña"
+                    required
+                    style="padding-right: 2.5rem;"
+                />    
+                
+            </div>
+            <button type="submit" id="">Iniciar sesión</button>
+        </form>
+
+        <div class="login-divider">o</div>
+
         <button id="btn-google">
             <svg
                 viewBox="-3 0 262 262"
@@ -31,46 +56,9 @@ import NoSessionLayout from "../layouts/NoSessionLayout.astro";
             </svg>
             Continuar con Google
         </button>
-        <button id="btn-facebook">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                version="1.1"
-                id="svg9"
-                viewBox="0 0 666.66668 666.66717"
-                class="login-svg"
-            >
-                <defs id="defs13">
-                    <clipPath clipPathUnits="userSpaceOnUse" id="clipPath25">
-                        <path d="M 0,700 H 700 V 0 H 0 Z" id="path23"></path>
-                    </clipPath>
-                </defs>
-                <g
-                    id="g17"
-                    transform="matrix(1.3333333,0,0,-1.3333333,-133.33333,799.99999)"
-                >
-                    <g id="g19">
-                        <g id="g21" clip-path="url(#clipPath25)">
-                            <g id="g27" transform="translate(600,350)">
-                                <path
-                                    d="m 0,0 c 0,138.071 -111.929,250 -250,250 -138.071,0 -250,-111.929 -250,-250 0,-117.245 80.715,-215.622 189.606,-242.638 v 166.242 h -51.552 V 0 h 51.552 v 32.919 c 0,85.092 38.508,124.532 122.048,124.532 15.838,0 43.167,-3.105 54.347,-6.211 V 81.986 c -5.901,0.621 -16.149,0.932 -28.882,0.932 -40.993,0 -56.832,-15.528 -56.832,-55.9 V 0 h 81.659 l -14.028,-76.396 h -67.631 V -248.169 C -95.927,-233.218 0,-127.818 0,0"
-                                    style="fill:#0866ff;fill-opacity:1;fill-rule:nonzero;stroke:none"
-                                    id="path29"></path>
-                            </g>
-                            <g
-                                id="g31"
-                                transform="translate(447.9175,273.6036)"
-                            >
-                                <path
-                                    d="M 0,0 14.029,76.396 H -67.63 v 27.019 c 0,40.372 15.838,55.899 56.831,55.899 12.733,0 22.981,-0.31 28.882,-0.931 v 69.253 c -11.18,3.106 -38.509,6.212 -54.347,6.212 -83.539,0 -122.048,-39.441 -122.048,-124.533 V 76.396 h -51.552 V 0 h 51.552 v -166.242 c 19.343,-4.798 39.568,-7.362 60.394,-7.362 10.254,0 20.358,0.632 30.288,1.831 L -67.63,0 Z"
-                                    style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
-                                    id="path33"></path>
-                            </g>
-                        </g>
-                    </g>
-                </g>
-            </svg>
-            Continuar con Facebook
-        </button>
+        <div style="">
+            ¿No tienes cuenta? <a href="/RegistroEmail">Regístrate aquí</a>
+        </div>
     </main>
 
     <style>
@@ -84,6 +72,65 @@ import NoSessionLayout from "../layouts/NoSessionLayout.astro";
             align-items: center;
             padding: 1rem;
             gap: 1rem;
+        }
+
+        #login-form input {
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        #login-form input:focus {
+            transform: scale(1.03);
+            outline: none;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        #login-form {
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--red);
+            border-radius: 10px;
+            padding: 5vw;
+            width: 95%;
+            max-width: 800px;
+            gap: 1vw;
+            transition: 0.3s;
+            background: rgba(30, 30, 30, 0.7); /* fondo más oscuro */
+
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        #login-form input {
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        #btn-login {
+            padding: 0.75rem;
+            background-color: #222;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #btn-login:hover {
+            background-color: #444;
+        }
+
+        .login-divider {
+            font-size: 0.9rem;
+            color: #888;
         }
 
         #btn-google,
@@ -124,9 +171,10 @@ import NoSessionLayout from "../layouts/NoSessionLayout.astro";
             color: #222;
             border: 1px solid #e0e0e0;
         }
+
         #btn-google:hover {
             background: #f5f5f5;
-            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.15);
+
             transform: translateY(-2px) scale(1.02);
         }
 
@@ -134,6 +182,7 @@ import NoSessionLayout from "../layouts/NoSessionLayout.astro";
             background: #1877f3;
             color: #fff;
         }
+
         #btn-facebook:hover {
             background: #145db2;
             box-shadow: 0 4px 12px rgba(24, 119, 243, 0.15);
@@ -144,12 +193,18 @@ import NoSessionLayout from "../layouts/NoSessionLayout.astro";
             #main-login {
                 padding: 0.5rem;
             }
+
+            #login-form {
+                max-width: 100%;
+            }
+
             #btn-google,
             #btn-facebook {
                 max-width: 100%;
                 font-size: 0.95rem;
                 padding: 0.6rem 0.5rem;
             }
+
             .login-svg {
                 width: 1.2em;
                 height: 1.2em;

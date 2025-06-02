@@ -44,7 +44,7 @@ if ($result->num_rows > 0) {
     // Devolver las rutinas en formato JSON
     echo json_encode($rutinas);
 } else {
-    echo json_encode(["mensaje" => "No se encontraron rutinas para este usuario"]);
+    echo json_encode(["mensaje" => "Todavía no tienes rutinas creadas."]);
 }
 
 // Cerrar la conexión

@@ -1,40 +1,99 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import Tutorial from '../components/Tutorial.astro';
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+
+import "/src/styles/home.css";
 ---
 
 <Layout>
-	<Hero />
+    <Hero />
     <main>
+        <section class="contenedor-rutina">
+            <h1>Tus Rutinas Personalizadas</h1>
+            <div id="info-usuario"></div>
+            <button id="btn-crear-rutina">Crea una rutina</button>
+            <div id="div-rutinas"></div>
+        </section>
 
+        <section id="rutinas-comunidad">
+            <h2>🔥 Top 3 Rutinas en tendencia de la comunidad 🔥<span class="icono-tendencia"></span>
+            </h2>
+            <div id="div-rutinas-comunidad">
+                
+            </div>
+        </section>
+
+        <!-- Diálogo para crear rutina -->
+        <dialog id="dialog-crear-rutina" class="dialog-crear-rutina">
+            <form
+                method="dialog"
+                id="form-crear-rutina"
+                class="dialog-crear-rutina"
+            >
+                <h2>Crea una rutina</h2>
+                <label for="nombre-rutina">Nombre de la rutina:</label>
+                <input type="text" id="nombre-rutina" required />
+                <label>Selecciona los días de la semana:</label>
+                <div id="checkbox-dias" class="checkbox-dias">
+                    <label class="labelDiaSemana">
+                        <input
+                            type="checkbox"
+                            value="Lunes"
+                            class="inputDiaSemana"
+                        /> Lunes
+                    </label>
+                    <label class="labelDiaSemana">
+                        <input
+                            type="checkbox"
+                            value="Martes"
+                            class="inputDiaSemana"
+                        /> Martes
+                    </label>
+                    <label class="labelDiaSemana">
+                        <input
+                            type="checkbox"
+                            value="Miércoles"
+                            class="inputDiaSemana"
+                        /> Miércoles
+                    </label>
+                    <label class="labelDiaSemana">
+                        <input
+                            type="checkbox"
+                            value="Jueves"
+                            class="inputDiaSemana"
+                        /> Jueves
+                    </label>
+                    <label class="labelDiaSemana">
+                        <input
+                            type="checkbox"
+                            value="Viernes"
+                            class="inputDiaSemana"
+                        /> Viernes
+                    </label>
+                    <label class="labelDiaSemana">
+                        <input
+                            type="checkbox"
+                            value="Sábado"
+                            class="inputDiaSemana"
+                        /> Sábado
+                    </label>
+                    <label class="labelDiaSemana">
+                        <input
+                            type="checkbox"
+                            value="Domingo"
+                            class="inputDiaSemana"
+                        /> Domingo
+                    </label>
+                </div>
+
+                <button type="submit" id="btn-crear-rutina-confirmar"
+                    >Crear Rutina</button
+                >
+            </form>
+            <button id="btn-cerrar-dialogo">Cerrar</button>
+        </dialog>
     </main>
-    <Tutorial />
 </Layout>
-<style>
-    #button-gestion-ejercicios {
-        margin: 2vw;
-        padding: 1vw;
-        border-radius: 1vw;
-
-    }
-    #button-gestion-ejercicios:hover {
-        background-color: var(--red);
-        color: var(--black);
-        transition: 0.3s;
-        animation: backgroundChange 1s infinite;
-    }
-
-    @keyframes backgroundChange {
-        0% {
-            box-shadow: 0px 0px 10px var(--black);
-        }
-        50% {
-            box-shadow: 0px 0px 10px var(--red);
-        }
-        100% {
-            box-shadow: 0px 0px 10px var(--black);
-        }
-    }
-</style>
+<style></style>
 <script type="module" src="/src/js/home.js"></script>
+<script type="module" src="/src/js/rutinas.js"></script>

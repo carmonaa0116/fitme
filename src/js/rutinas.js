@@ -28,7 +28,7 @@ async function cargarRutinas() {
         const usuario = JSON.parse(usuarioJSON);
         const rutinas = await getRutinasUser(usuario.id);
 
-        console.log(rutinas); // Verifica que las rutinas se obtienen correctamente
+       // Verifica que las rutinas se obtienen correctamente
 
         if (rutinas.mensaje) {
             divRutinas.innerHTML = `

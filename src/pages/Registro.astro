@@ -101,21 +101,12 @@ import "../styles/global.css";
         gap: 1vw;
         transition: 0.3s;
     }
-    a {
-        text-decoration: none;
-        color: var(--red);
-        font-weight: 500;
-        transition: color 0.3s ease;
-    }
+
     a:hover {
         color: var(--secundary-red);
         animation: backgroundChange 1s infinite alternate;
         animation-fill-mode: forwards;
     }
-    a:visited {
-        color: var(--red);
-    }
-
     @media (min-width: 768px) {
         #form-registro {
             margin-top: 10vh;
@@ -130,6 +121,13 @@ import "../styles/global.css";
             width: 60%;
             max-width: 1200px;
         }
+    }
+
+    #form-registro input {
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
     }
 </style>
 

@@ -1,0 +1,182 @@
+---
+import NoSessionLayout from "../layouts/NoSessionLayout.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+---
+
+<NoSessionLayout>
+    <dialog id="dialog-mensaje" class="modal-dialog">
+        <form method="dialog" class="modal-content">
+            <p id="dialog-text"></p>
+            <menu>
+                <button id="cerrar-dialogo">Cerrar</button>
+            </menu>
+        </form>
+    </dialog>
+    <main id="main-registro">
+        <div id="div-registro">
+            <form id="form-registro">
+                <h2 style="text-align: center;">Registro</h2>
+
+                <div id="divNombre">
+                    <label for="nombre">Nombre:</label>
+                    <input
+                        type="text"
+                        id="nombre"
+                        name="nombre"
+                        required
+                    />
+                    <p id="mensajeNombre"></p>
+                </div>
+
+                <div id="divNombreUsuario">
+                    <label for="nombre_usuario">Nombre de usuario:</label>
+                    <input
+                        type="text"
+                        id="nombre_usuario"
+                        name="nombre_usuario"
+                        required
+                    />
+                    <p id="mensajeNU"></p>
+                </div>
+
+                <div>
+                    <label for="email">Correo electrónico:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                    />
+                </div>
+
+                <div>
+                    <label for="password">Contraseña:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        minlength="6"
+                    />
+                </div>
+                <div>
+                    <label for="sexo">Sexo:</label>
+                    <select name="sexo" id="sexo" required>
+                        <option value="">Selecciona</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="femenino">Femenino</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+                    <input
+                        type="date"
+                        id="fecha_nacimiento"
+                        name="fecha_nacimiento"
+                        required
+                    />
+                </div>
+
+                <div>
+                    <label for="experiencia">Nivel de experiencia:</label>
+                    <select name="experiencia" id="experiencia" required>
+                        <option value="">Selecciona</option>
+                        <option value="principiante">Principiante</option>
+                        <option value="intermedio">Intermedio</option>
+                        <option value="avanzado">Avanzado</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="altura">Altura (cm):</label>
+                    <input
+                        type="number"
+                        step="0.01"
+                        id="altura"
+                        name="altura"
+                        placeholder="Ej: 180.5"
+                        required
+                    />
+                </div>
+
+                <div>
+                    <label for="peso">Peso (kg):</label>
+                    <input
+                        type="number"
+                        step="0.01"
+                        id="peso"
+                        name="peso"
+                        placeholder="Ej: 75.25"
+                        required
+                    />
+                </div>
+                <button type="submit">Crear cuenta</button>
+            </form>
+            
+        </div>
+        <div style="text-align: center; margin-top: 1rem;">
+            ¿Ya tienes cuenta? <a href="/">Inicia sesión aquí</a>
+        </div>
+    </main>
+</NoSessionLayout>
+<style>
+    @import url("../assets/font/font.css");
+
+    #div-registro {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    #form-registro {
+        color: var(--white);
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--red);
+        border-radius: 10px;
+        padding: 5vw;
+        width: 95%;
+        max-width: 800px;
+        gap: 1vw;
+        transition: 0.3s;
+        background: rgba(30, 30, 30, 0.7); /* fondo más oscuro */
+
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    a {
+        text-decoration: none;
+        color: var(--red);
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+    a:hover {
+        color: var(--secundary-red);
+        animation: backgroundChange 1s infinite alternate;
+        animation-fill-mode: forwards;
+    }
+    a:visited {
+        color: var(--red);
+    }
+
+    @media (min-width: 768px) {
+        #form-registro {
+            width: 80%;
+            max-width: 1000px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        #form-registro {
+            width: 60%;
+            max-width: 1200px;
+        }
+    }
+</style>
+
+<script type="module" src="/src/js/registroEmail.js"></script>

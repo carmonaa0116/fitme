@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-06-2025 a las 19:53:20
+-- Tiempo de generación: 02-06-2025 a las 18:21:37
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -32,6 +32,13 @@ CREATE TABLE `amigos` (
   `id_usuario2` int(11) NOT NULL,
   `fecha_amistad` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `amigos`
+--
+
+INSERT INTO `amigos` (`id_usuario1`, `id_usuario2`, `fecha_amistad`) VALUES
+(8, 10, '2025-06-02 17:49:22');
 
 -- --------------------------------------------------------
 
@@ -143,6 +150,13 @@ CREATE TABLE `ejercicios_rutina` (
   `peso` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `ejercicios_rutina`
+--
+
+INSERT INTO `ejercicios_rutina` (`id`, `idRutina`, `dia_semana`, `idEjercicio`, `series`, `repeticionesInicio`, `repeticionesFin`, `peso`) VALUES
+(20, 27, 'Lunes', 11, 3, 12, 20, 50);
+
 -- --------------------------------------------------------
 
 --
@@ -247,8 +261,29 @@ CREATE TABLE `rutinas` (
   `idUsuario` int(11) DEFAULT NULL,
   `nombre` varchar(255) DEFAULT NULL,
   `dias` varchar(255) DEFAULT NULL,
-  `privacidad` enum('privado','publico') NOT NULL DEFAULT 'privado'
+  `privacidad` enum('privado','publico') NOT NULL DEFAULT 'privado',
+  `visitas` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `rutinas`
+--
+
+INSERT INTO `rutinas` (`id`, `idUsuario`, `nombre`, `dias`, `privacidad`, `visitas`) VALUES
+(24, 8, 'Rutina 1', 'Lunes,Miércoles,Viernes', 'privado', 32),
+(27, 9, 'Rutina Alejandro', 'Lunes,Miércoles,Viernes', 'privado', 1),
+(29, 8, 'Rutina Alejandro', 'Lunes,Jueves,Sábado', 'privado', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `rutinas_usuario`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `rutinas_usuario` (
+`id_usuario` int(11)
+,`total_rutinas` bigint(21)
+);
 
 -- --------------------------------------------------------
 
@@ -264,6 +299,16 @@ CREATE TABLE `solicitudes_amistad` (
   `fecha_solicitud` datetime NOT NULL DEFAULT current_timestamp(),
   `fecha_respuesta` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `solicitudes_amistad`
+--
+
+INSERT INTO `solicitudes_amistad` (`id`, `id_remitente`, `id_destinatario`, `estado`, `fecha_solicitud`, `fecha_respuesta`) VALUES
+(6, 10, 9, 'Pendiente', '2025-06-02 17:40:09', NULL),
+(7, 10, 9, 'Pendiente', '2025-06-02 17:40:11', NULL),
+(8, 10, 9, 'Pendiente', '2025-06-02 17:40:13', NULL),
+(9, 10, 8, 'Aceptada', '2025-06-02 17:40:17', '2025-06-02 17:49:22');
 
 --
 -- Disparadores `solicitudes_amistad`
@@ -303,17 +348,49 @@ CREATE TABLE `usuarios` (
   `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp(),
   `email` varchar(100) NOT NULL,
   `foto_perfil` mediumblob DEFAULT NULL,
-  `n_registros` int(11) NOT NULL DEFAULT 0,
+  `n_registros` int(11) NOT NULL DEFAULT 1,
   `uid` varchar(255) NOT NULL,
-  `provider` varchar(255) NOT NULL
+  `provider` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre_usuario`, `nombre`, `sexo`, `fecha_nacimiento`, `experiencia`, `altura`, `peso`, `fecha_registro`, `email`, `foto_perfil`, `n_registros`, `uid`, `provider`) VALUES
-(6, 'carmonaa1601', 'Alejandro Carmona Rodero', '', '2002-01-16', 'Intermedio', 186, 80, '2025-06-01 17:51:55', 'alejandrocarmonarodero@gmail.com', NULL, 0, '7fnPgYvrE2MovI9zZARurpiuofB2', '');
+INSERT INTO `usuarios` (`id`, `nombre_usuario`, `nombre`, `sexo`, `fecha_nacimiento`, `experiencia`, `altura`, `peso`, `fecha_registro`, `email`, `foto_perfil`, `n_registros`, `uid`, `provider`, `password`) VALUES
+(8, 'carmonac14', 'carmonac14', '', '2002-01-16', 'Principiante', 180, 90, '2025-06-02 14:29:07', 'carmonac14@gmail.com', NULL, 3, 'g1dNJfBlz8Ns1BmQh4SxugzblW73', 'email', '$2y$10$c0hZsow/u4igFVoyyqFKGuFAq4mf3fKcekTnY4d2N2p720h50jG8m'),
+(9, 'carmonaa1601', 'Alejandro Carmona Rodero', '', '2002-01-16', 'Intermedio', 186, 95, '2025-06-02 14:36:41', 'alejandrocarmonarodero@gmail.com', NULL, 3, 'ck8moO1MnJdJrY3MsC1diP5LhMx2', '', ''),
+(10, 'carmonaa0116', 'Alejandro Carmona', '', '2002-01-16', 'Intermedio', 186, 95, '2025-06-02 15:40:04', 'carmonaa0116@gmail.com', NULL, 1, 'otOULNpKm3Xv5VuHoA4LILYwKBx1', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `vista_usuarios`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `vista_usuarios` (
+`id` int(11)
+,`n_amigos` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `rutinas_usuario`
+--
+DROP TABLE IF EXISTS `rutinas_usuario`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `rutinas_usuario`  AS SELECT `u`.`id` AS `id_usuario`, count(`r`.`id`) AS `total_rutinas` FROM (`usuarios` `u` left join `rutinas` `r` on(`u`.`id` = `r`.`idUsuario`)) GROUP BY `u`.`id` ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vista_usuarios`
+--
+DROP TABLE IF EXISTS `vista_usuarios`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_usuarios`  AS SELECT `u`.`id` AS `id`, (select count(0) from `amigos` `a` where `a`.`id_usuario1` = `u`.`id` or `a`.`id_usuario2` = `u`.`id`) AS `n_amigos` FROM `usuarios` AS `u` ;
 
 --
 -- Índices para tablas volcadas
@@ -411,7 +488,7 @@ ALTER TABLE `ejercicios`
 -- AUTO_INCREMENT de la tabla `ejercicios_rutina`
 --
 ALTER TABLE `ejercicios_rutina`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajes`
@@ -429,19 +506,19 @@ ALTER TABLE `musculos`
 -- AUTO_INCREMENT de la tabla `rutinas`
 --
 ALTER TABLE `rutinas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `solicitudes_amistad`
 --
 ALTER TABLE `solicitudes_amistad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas

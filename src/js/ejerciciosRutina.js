@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (ejerciciosRutinaDia && ejerciciosRutinaDia.length > 0) {
                 ejerciciosRutinaDia.forEach(ejercicio => {
+                    console.log(ejercicio.peso);
                     listaEjerciciosHTML += `
                         <li class="ejercicioItem">
                             <ul class="detalleEjercicio" data-dia="${dia}">
@@ -120,7 +121,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     const nombreEjercicio = detalle.querySelector('.nombreEjercicio').textContent.split(": ")[1];
                     const seriesEjercicio = detalle.querySelector('.seriesEjercicio').textContent.split(": ")[1];
                     const repeticionesEjercicio = detalle.querySelector('.repeticionesEjercicio').textContent.split(": ")[1];
-                    const pesoEjercicio = detalle.querySelector('.pesoEjercicio') ? detalle.querySelector('.pesoEjercicio').textContent.split(": ")[1] : '';
+                    const pesoEjercicio = detalle.querySelector('.pesoEjercicio')
+                        ? detalle.querySelector('.pesoEjercicio').textContent.split(": ")[1].replace(' kg', '').trim()
+                        : '';
                     const dialogEditarEliminar = document.getElementById("dialogAgregarEjercicio");
                     btnEliminarRutina.disabled = true;
                     btnEliminarRutina.style.cursor = "not-allowed";
@@ -158,13 +161,27 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
 
                     document.getElementById("btnEliminarEjercicio").addEventListener("click", async () => {
-                        const confirmacion = confirm("¿Estás seguro de que deseas eliminar este ejercicio?");
-                        if (confirmacion) {
+                        dialogEditarEliminar.innerHTML = `
+                            <div class="dialogContent">
+                                <p>¿Estás seguro de que deseas eliminar este ejercicio?</p>
+                                <button id="btnConfirmarEliminarEjercicio" class="btn btn-danger">Eliminar</button>
+                                <button id="btnCancelarEliminarEjercicio" class="btn btn-secondary">Cancelar</button>
+                            </div>
+                        `;
+                        dialogEditarEliminar.style.display = "block";
+
+                        document.getElementById("btnCancelarEliminarEjercicio").addEventListener("click", () => {
+                            dialogEditarEliminar.style.display = "none";
+                            btnEliminarRutina.disabled = false;
+                            btnEliminarRutina.style.cursor = "pointer";
+                        });
+
+                        document.getElementById("btnConfirmarEliminarEjercicio").addEventListener("click", async () => {
                             const idEjercicioJSON = await getIdEjercicio(nombreEjercicio);
                             await deleteEjercicioRutinaDia(parseInt(idRecibido), dia, parseInt(idEjercicioJSON.id));
                             dialogEditarEliminar.style.display = "none";
                             await cargarContenidoRutina();
-                        }
+                        });
                     });
 
                     document.getElementById("formEditarEjercicio").addEventListener("submit", async (event) => {
@@ -187,11 +204,24 @@ document.addEventListener("DOMContentLoaded", () => {
         const buttonEliminarRutina = document.getElementById("buttonEliminarRutina");
         if (buttonEliminarRutina) {
             buttonEliminarRutina.addEventListener("click", async () => {
-                const confirmacion = confirm("¿Estás seguro de que deseas eliminar la rutina? Esta acción no se puede deshacer.");
-                if (confirmacion) {
+                const dialogAgregarEjercicio = document.getElementById("dialogAgregarEjercicio");
+                dialogAgregarEjercicio.innerHTML = `
+                    <div class="dialogContent">
+                        <p>¿Estás seguro de que deseas eliminar la rutina? Esta acción no se puede deshacer.</p>
+                        <button id="btnConfirmarEliminarRutina" class="btn btn-danger">Eliminar</button>
+                        <button id="btnCancelarEliminarRutina" class="btn btn-secondary">Cancelar</button>
+                    </div>
+                `;
+                dialogAgregarEjercicio.style.display = "block";
+
+                document.getElementById("btnCancelarEliminarRutina").addEventListener("click", () => {
+                    dialogAgregarEjercicio.style.display = "none";
+                });
+
+                document.getElementById("btnConfirmarEliminarRutina").addEventListener("click", async () => {
                     await deleteRutina(idRecibido);
                     window.location.href = "../Rutinas";
-                }
+                });
             });
         }
     }

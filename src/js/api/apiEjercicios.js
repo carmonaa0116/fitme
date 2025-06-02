@@ -226,6 +226,22 @@ export async function deleteEjercicioRutinaDia(id_rutina, dia_semana, idEjercici
     }
 }
 
+export async function getTopRutinas() {
+    try {
+        const response = await fetch('http://localhost/php-fitme/getTopRutinas.php');
+
+        if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error("Error al obtener las rutinas:", error);
+    }
+}
+
 export async function getEjerciciosPorDia(idRutina, dia) {
     try {
         const response = await fetch('http://localhost/php-fitme/getEjerciciosRutinaDia.php', {
@@ -665,6 +681,28 @@ export async function enviar_solicitud(id_usuario, id_usuario_solicitud) {
 
 }
 
+export async function actualizarVisitasRutina(id_rutina) {
+    try {
+        const response = await fetch('http://localhost/php-fitme/actualizarVisitasRutina.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id_rutina: id_rutina })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error("Error al actualizar las visitas de la rutina:", error);
+    }
+}
+
 export async function login(nombre_usuario, contrasena) {
     // Validación de los campos
     if (!nombre_usuario || !contrasena) {
@@ -673,7 +711,7 @@ export async function login(nombre_usuario, contrasena) {
 
     const datos = {
         nombre_usuario: nombre_usuario,
-        contrasena: contrasena
+        password: contrasena
     };
 
     try {
@@ -732,14 +770,27 @@ export async function registrar(datos) {
     }
 }
 
-export async function comprobarUsuarioLogin(uid, email) {
+export async function registrarConEmail(datos) {
+    console.log("Datos a registrar:", datos); // Verifica los datos que se envían
     try {
-        const response = await fetch('http://localhost/php-fitme/comprobarUsr.php', {
+        const response = await fetch('http://localhost/php-fitme/registroEmail.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ uid })
+            body: JSON.stringify({
+                uid: datos.uid,
+                nombre_usuario: datos.nombre_usuario,
+                nombre: datos.nombre,
+                sexo: datos.sexo,
+                fecha_nacimiento: datos.fecha_nacimiento,
+                experiencia: datos.experiencia,
+                altura: datos.altura,
+                peso: datos.peso,
+                email: datos.email,
+                provider: datos.provider,
+                password: datos.password
+            })
         });
 
         if (!response.ok) {
@@ -747,6 +798,29 @@ export async function comprobarUsuarioLogin(uid, email) {
         }
 
         const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+        return { error: 'No se pudo registrar el usuario. Inténtalo más tarde.' };
+    }
+}
+
+export async function comprobarUsuarioLogin(uid, email) {
+    try {
+        const response = await fetch('http://localhost/php-fitme/comprobarUsr.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ uid: uid, email: email })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Respuesta del servidor')
         console.log(data); // Verifica la respuesta del servidor
         // El PHP devuelve { found: true } o { found: false }
         return data.found;
@@ -769,8 +843,6 @@ export async function deleteRutina(idRecibido) {
         if (response.ok) {
             const data = await response.json();
             console.log(data); // Verifica la respuesta del servidor
-            alert("Rutina eliminada correctamente.");
-            window.location.href = "../index.html"; // Redirigir a la página principal
             return data;
         } else {
             alert("Error al eliminar la rutina.");

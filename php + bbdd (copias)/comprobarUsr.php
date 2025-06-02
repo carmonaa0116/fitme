@@ -15,7 +15,7 @@ if (isset($data['uid']) && isset($data['email'])) {
     $uid = $data['uid'];
     $email = $data['email'];
 
-    $sql = "SELECT * FROM usuarios WHERE uid = ? AND email = ?";
+    $sql = "SELECT * FROM usuarios WHERE uid = ? OR email = ?";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("ss", $uid, $email);
     $stmt->execute();

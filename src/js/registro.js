@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const uid = userData.uid;
         const nombre = userData.nombre;
         const email = userData.email;
+        const provider = userData.provider || 'unknown';
 
         console.log('UID:', uid);
         console.log('Nombre:', nombre);
@@ -50,8 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 experiencia: selectExperiencia.value,
                 altura: inputAltura.value,
                 peso: inputPeso.value,
-                email: email
-                
+                email: email,
+                provider: provider
             };
 
             const registro = await registrar(datos);

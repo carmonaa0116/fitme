@@ -4,9 +4,8 @@ header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header('Content-Type: application/json; charset=utf-8');
 
-include 'conexion.php'; // Aquí tomamos la conexión desde conexion.php
-
-session_start(); // Inicia la sesión
+include 'conexion.php';
+session_start();
 
 try {
     $datos = json_decode(file_get_contents('php://input'), true);
@@ -16,45 +15,72 @@ try {
         exit;
     }
 
-    // Validaciones básicas
-    if (empty($datos['nombre_usuario']) || empty($datos['contrasena'])) {
+    if (empty($datos['nombre_usuario']) || empty($datos['password'])) {
         echo json_encode(['mensaje' => false, 'error' => 'Faltan datos']);
         exit;
     }
 
-    // Buscar el usuario en la base de datos
-    $stmt = $conn->prepare("SELECT id, nombre_usuario, contrasena, nombre, email, sexo, fecha_nacimiento, experiencia, altura, peso FROM usuarios WHERE nombre_usuario = ?");
+    // 1. Buscar usuario por nombre_usuario
+    $stmt = $conn->prepare("
+        SELECT 
+            u.id,
+            u.nombre_usuario,
+            u.password,
+            u.nombre,
+            u.email,
+            u.sexo,
+            u.fecha_nacimiento,
+            u.experiencia,
+            u.altura,
+            u.peso,
+            u.fecha_registro,
+            u.foto_perfil,
+            u.n_registros,
+            u.uid,
+            u.provider,
+            ru.total_rutinas AS n_rutinas,
+            vu.n_amigos
+        FROM usuarios u
+        LEFT JOIN rutinas_usuario ru ON u.id = ru.id_usuario
+        LEFT JOIN vista_usuarios vu ON u.id = vu.id
+        WHERE u.nombre_usuario = ?
+    ");
     $stmt->bind_param("s", $datos['nombre_usuario']);
     $stmt->execute();
     $resultado = $stmt->get_result();
 
-    // Verificar si el usuario existe
     if ($resultado->num_rows == 0) {
         echo json_encode(['mensaje' => false, 'error' => 'Usuario no encontrado']);
         exit;
     }
 
-    // Obtener los datos del usuario
     $usuario = $resultado->fetch_assoc();
 
-    // Verificar la contraseña
-    if (!password_verify($datos['contrasena'], $usuario['contrasena'])) {
+    // 2. Verificar contraseña
+    if (!password_verify($datos['password'], $usuario['password'])) {
         echo json_encode(['mensaje' => false, 'error' => 'Contraseña incorrecta']);
         exit;
     }
 
-    // Convertir todos los valores del usuario a string
+    // 3. Incrementar el contador n_registros
+    $nuevoRegistro = intval($usuario['n_registros']) + 1;
+
+    $updateStmt = $conn->prepare("UPDATE usuarios SET n_registros = ? WHERE id = ?");
+    $updateStmt->bind_param("ii", $nuevoRegistro, $usuario['id']);
+    $updateStmt->execute();
+    $updateStmt->close();
+
+    $usuario['n_registros'] = strval($nuevoRegistro);
+
+    // 4. Convertir todos los valores a string o null
     foreach ($usuario as $key => $value) {
-        $usuario[$key] = strval($value);
+        $usuario[$key] = is_null($value) ? null : strval($value);
     }
 
-    // Almacenar los datos del usuario en la sesión
+    // 5. Crear sesión
     $_SESSION['usuario'] = $usuario;
 
-    // Devolver los datos del usuario
     echo json_encode(['mensaje' => true, 'usuario' => $usuario]);
-
 } catch (Exception $e) {
     echo json_encode(['mensaje' => false, 'error' => $e->getMessage()]);
 }
-?>

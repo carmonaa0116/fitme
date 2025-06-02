@@ -19,7 +19,33 @@ if (!isset($data['id'])) {
     $id = $data['id'];
 
     // Preparar la consulta
-    $sql = "SELECT * FROM rutinas WHERE id = ?";
+    $sql = "
+SELECT 
+    rutinas.id AS rutina_id,
+    rutinas.nombre AS rutina_nombre,
+    rutinas.dias,
+    rutinas.privacidad,
+    usuarios.id AS usuario_id,
+    usuarios.nombre_usuario,
+    usuarios.nombre AS nombre_completo,
+    usuarios.sexo,
+    usuarios.fecha_nacimiento,
+    usuarios.experiencia,
+    usuarios.altura,
+    usuarios.peso,
+    usuarios.email,
+    usuarios.foto_perfil,
+    usuarios.n_registros,
+    usuarios.uid,
+    usuarios.provider
+FROM 
+    rutinas
+JOIN 
+    usuarios ON rutinas.idUsuario = usuarios.id
+WHERE 
+    rutinas.id = ?
+";
+
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();

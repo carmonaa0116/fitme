@@ -16,7 +16,31 @@ if (is_null($data)) {
 if (isset($data['uid'])) {
     $uid = $data['uid'];
 
-    $sql = "SELECT id, nombre_usuario, nombre, sexo, fecha_nacimiento, experiencia, altura, peso, fecha_registro, email, foto_perfil, n_registros, uid, provider FROM usuarios WHERE uid = ?";
+    $sql = "SELECT 
+    u.id,
+    u.nombre_usuario,
+    u.nombre,
+    u.sexo,
+    u.fecha_nacimiento,
+    u.experiencia,
+    u.altura,
+    u.peso,
+    u.fecha_registro,
+    u.email,
+    u.foto_perfil,
+    u.n_registros,
+    u.uid,
+    u.provider,
+    vu.n_amigos AS n_amigos,
+    ru.total_rutinas AS n_rutinas
+FROM 
+    usuarios u
+JOIN 
+    vista_usuarios vu ON u.id = vu.id
+LEFT JOIN 
+    rutinas_usuario ru ON u.id = ru.id_usuario
+WHERE 
+    uid = ?;";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("s", $uid);
     $stmt->execute();
@@ -40,4 +64,3 @@ if (isset($data['uid'])) {
 }
 
 $conexion->close();
-?>

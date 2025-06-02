@@ -1,6 +1,6 @@
 import { auth } from '/src/firebase.js';
 import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth';
-import { comprobarUsuarioLogin, getDatosUsuarioUID } from '/src/js/api/apiEjercicios.js';
+import { comprobarUsuarioLogin, getDatosUsuarioUID, login } from '/src/js/api/apiEjercicios.js';
 document.addEventListener('DOMContentLoaded', () => {
     const btnGoogle = document.getElementById('btn-google');
     const btnFacebook = document.getElementById('btn-facebook');
@@ -15,14 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const existeUsuario = await comprobarUsuarioLogin(user.uid, user.email);
             if (existeUsuario === true) {
                 const datosUsuario = await getDatosUsuarioUID(user.uid);
-                console.log(datosUsuario);
+                console.log('Login.js')
+                console.log(datosUsuario.JSON);
                 sessionStorage.setItem("usuario", JSON.stringify(datosUsuario));
                 window.location.href = '/Home';
             } else {
                 sessionStorage.setItem("usuarioprovisional", JSON.stringify({
                     uid: user.uid,
                     nombre: user.displayName,
-                    email: user.email
+                    email: user.email,
+                    provider: 'google'
                 }));
                 window.location.href = '/Registro';
             }
@@ -60,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    document.getElementById("form-login")?.addEventListener("submit", async function (event) {
+    document.getElementById("login-form")?.addEventListener("submit", async function (event) {
         event.preventDefault();
         const nombreUsuario = document.getElementById("nombre_usuario").value;
         const contrasena = document.getElementById("contrasena").value;
