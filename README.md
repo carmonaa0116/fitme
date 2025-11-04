@@ -173,5 +173,3 @@ This project is open-source. License not specified.
 - [Astro](https://astro.build/)
 - [Firebase](https://firebase.google.com/)
 - [XAMPP](https://www.apachefriends.org/)
-- [GSAP](https://greensock.com/)
-- [Driver.js](https://driverjs.com/)
